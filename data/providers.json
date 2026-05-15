@@ -1,0 +1,962 @@
+[
+  {
+    "id": "c0b8fab6-67ac-4735-933b-49a9a48d0efc",
+    "full_name": "Kamran Malik",
+    "service_type": "Painter",
+    "rating": 4.8,
+    "reliability_score": 91,
+    "cancellation_rate": 0.08,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.809902609424892,
+      "lng": 67.0621885158865,
+      "neighborhood": "DHA"
+    },
+    "verified": false,
+    "experience_years": 13
+  },
+  {
+    "id": "89240bd6-017c-4780-9e56-fa3669b6e068",
+    "full_name": "Faisal Sheikh",
+    "service_type": "Electrician",
+    "rating": 3.8,
+    "reliability_score": 71,
+    "cancellation_rate": 0.14,
+    "base_rate": 2000,
+    "location": {
+      "lat": 24.847973801182814,
+      "lng": 67.06613711930706,
+      "neighborhood": "PECHS"
+    },
+    "verified": true,
+    "experience_years": 7
+  },
+  {
+    "id": "0d0f6df0-98d4-42ad-99fe-18c7ecf9deb6",
+    "full_name": "Bilal Ali",
+    "service_type": "Painter",
+    "rating": 3.6,
+    "reliability_score": 97,
+    "cancellation_rate": 0.15,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.8195619354513,
+      "lng": 67.04220784655388,
+      "neighborhood": "Clifton"
+    },
+    "verified": true,
+    "experience_years": 8
+  },
+  {
+    "id": "878d8574-e771-40af-80fb-98635db0c603",
+    "full_name": "Usman Ali",
+    "service_type": "AC Repair",
+    "rating": 3.7,
+    "reliability_score": 89,
+    "cancellation_rate": 0.01,
+    "base_rate": 2000,
+    "location": {
+      "lat": 24.941059191807902,
+      "lng": 67.05899491391546,
+      "neighborhood": "North Nazimabad"
+    },
+    "verified": true,
+    "experience_years": 10
+  },
+  {
+    "id": "81ecab2e-8c40-441e-97d6-3f8577713920",
+    "full_name": "Hamza Malik",
+    "service_type": "Plumber",
+    "rating": 3.9,
+    "reliability_score": 85,
+    "cancellation_rate": 0.11,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.797060724545943,
+      "lng": 67.05262231120963,
+      "neighborhood": "DHA"
+    },
+    "verified": true,
+    "experience_years": 8
+  },
+  {
+    "id": "4827834b-9041-4ed7-98e1-eb6344dd05bc",
+    "full_name": "Hamza Khan",
+    "service_type": "Electrician",
+    "rating": 4.6,
+    "reliability_score": 96,
+    "cancellation_rate": 0.1,
+    "base_rate": 1000,
+    "location": {
+      "lat": 24.853334558453696,
+      "lng": 67.06345680906269,
+      "neighborhood": "PECHS"
+    },
+    "verified": true,
+    "experience_years": 1
+  },
+  {
+    "id": "08d27a81-7b35-41f1-b00a-4242a08edd70",
+    "full_name": "Bilal Siddiqui",
+    "service_type": "Painter",
+    "rating": 5.0,
+    "reliability_score": 84,
+    "cancellation_rate": 0.15,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.798102844838517,
+      "lng": 67.05825084932523,
+      "neighborhood": "DHA"
+    },
+    "verified": true,
+    "experience_years": 1
+  },
+  {
+    "id": "5992f089-2884-4405-ae9a-7c18681fada3",
+    "full_name": "Kamran Sheikh",
+    "service_type": "Painter",
+    "rating": 4.6,
+    "reliability_score": 96,
+    "cancellation_rate": 0.11,
+    "base_rate": 2000,
+    "location": {
+      "lat": 24.808700192900435,
+      "lng": 67.05995514491816,
+      "neighborhood": "DHA"
+    },
+    "verified": true,
+    "experience_years": 11
+  },
+  {
+    "id": "8a14a64b-5cd7-4568-8f67-13e7234b7210",
+    "full_name": "Ahmed Ali",
+    "service_type": "Plumber",
+    "rating": 3.7,
+    "reliability_score": 74,
+    "cancellation_rate": 0.08,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.92880360107529,
+      "lng": 67.10737120273383,
+      "neighborhood": "Gulshan"
+    },
+    "verified": true,
+    "experience_years": 15
+  },
+  {
+    "id": "4fcbf1ec-e0ec-4716-b902-f9d8e57e6c60",
+    "full_name": "Hamza Raza",
+    "service_type": "AC Repair",
+    "rating": 4.8,
+    "reliability_score": 72,
+    "cancellation_rate": 0.1,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.81274546775707,
+      "lng": 67.03429545529984,
+      "neighborhood": "Clifton"
+    },
+    "verified": false,
+    "experience_years": 6
+  },
+  {
+    "id": "d406dba2-0906-4e93-8e5a-68f0f32ca4b7",
+    "full_name": "Ahmed Sheikh",
+    "service_type": "Plumber",
+    "rating": 4.2,
+    "reliability_score": 82,
+    "cancellation_rate": 0.05,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.804259411220393,
+      "lng": 67.04828521387743,
+      "neighborhood": "DHA"
+    },
+    "verified": false,
+    "experience_years": 9
+  },
+  {
+    "id": "db3891ee-7d7d-4415-8a2f-5956732e3b2a",
+    "full_name": "Ahmed Ahmed",
+    "service_type": "Painter",
+    "rating": 3.9,
+    "reliability_score": 92,
+    "cancellation_rate": 0.14,
+    "base_rate": 2000,
+    "location": {
+      "lat": 24.874286723975324,
+      "lng": 67.05291825718946,
+      "neighborhood": "PECHS"
+    },
+    "verified": true,
+    "experience_years": 5
+  },
+  {
+    "id": "b8ae2c17-960a-4281-aed0-57ec7912c959",
+    "full_name": "Hassan Sheikh",
+    "service_type": "Electrician",
+    "rating": 4.5,
+    "reliability_score": 99,
+    "cancellation_rate": 0.08,
+    "base_rate": 2000,
+    "location": {
+      "lat": 24.941406951549574,
+      "lng": 67.06021777377853,
+      "neighborhood": "North Nazimabad"
+    },
+    "verified": false,
+    "experience_years": 12
+  },
+  {
+    "id": "30eb9bb9-5cbe-4339-a96b-9bee9e47912f",
+    "full_name": "Hamza Raza",
+    "service_type": "Electrician",
+    "rating": 4.4,
+    "reliability_score": 95,
+    "cancellation_rate": 0.09,
+    "base_rate": 800,
+    "location": {
+      "lat": 24.91166774787524,
+      "lng": 67.08114052951592,
+      "neighborhood": "Gulshan"
+    },
+    "verified": true,
+    "experience_years": 14
+  },
+  {
+    "id": "d20016dc-f7f3-45db-9768-43e00b72a7f2",
+    "full_name": "Hamza Khan",
+    "service_type": "Electrician",
+    "rating": 4.9,
+    "reliability_score": 74,
+    "cancellation_rate": 0.02,
+    "base_rate": 800,
+    "location": {
+      "lat": 24.810055021015184,
+      "lng": 67.06423682054957,
+      "neighborhood": "DHA"
+    },
+    "verified": true,
+    "experience_years": 2
+  },
+  {
+    "id": "994cc3f7-f099-4e38-8c90-dd74f2fa1ca5",
+    "full_name": "Bilal Sheikh",
+    "service_type": "Plumber",
+    "rating": 3.6,
+    "reliability_score": 77,
+    "cancellation_rate": 0.08,
+    "base_rate": 1000,
+    "location": {
+      "lat": 24.86587306158711,
+      "lng": 67.03599664498755,
+      "neighborhood": "PECHS"
+    },
+    "verified": false,
+    "experience_years": 5
+  },
+  {
+    "id": "36f8e846-5f40-4468-8863-c0a2303040e6",
+    "full_name": "Muhammad Raza",
+    "service_type": "Plumber",
+    "rating": 4.6,
+    "reliability_score": 93,
+    "cancellation_rate": 0.11,
+    "base_rate": 800,
+    "location": {
+      "lat": 24.90538151311766,
+      "lng": 67.09093093452024,
+      "neighborhood": "Gulshan"
+    },
+    "verified": true,
+    "experience_years": 9
+  },
+  {
+    "id": "bf8e8542-e7c0-461e-bfab-b55b7872e735",
+    "full_name": "Ali Qureshi",
+    "service_type": "Painter",
+    "rating": 4.9,
+    "reliability_score": 100,
+    "cancellation_rate": 0.01,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.938560437408714,
+      "lng": 67.04879377713718,
+      "neighborhood": "North Nazimabad"
+    },
+    "verified": false,
+    "experience_years": 11
+  },
+  {
+    "id": "f1ab420e-057c-4600-a812-175481b14fc1",
+    "full_name": "Hassan Qureshi",
+    "service_type": "Plumber",
+    "rating": 3.8,
+    "reliability_score": 94,
+    "cancellation_rate": 0.14,
+    "base_rate": 2000,
+    "location": {
+      "lat": 24.898956591319035,
+      "lng": 67.09150745524174,
+      "neighborhood": "Gulshan"
+    },
+    "verified": true,
+    "experience_years": 1
+  },
+  {
+    "id": "482de629-4698-4144-905f-75498065e168",
+    "full_name": "Faisal Ahmed",
+    "service_type": "Plumber",
+    "rating": 3.7,
+    "reliability_score": 74,
+    "cancellation_rate": 0.09,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.868409530952714,
+      "lng": 67.05052773247701,
+      "neighborhood": "PECHS"
+    },
+    "verified": true,
+    "experience_years": 8
+  },
+  {
+    "id": "3e53b029-bdc7-4015-b60a-c247bfd2e380",
+    "full_name": "Zubair Raza",
+    "service_type": "Electrician",
+    "rating": 3.8,
+    "reliability_score": 100,
+    "cancellation_rate": 0.13,
+    "base_rate": 2000,
+    "location": {
+      "lat": 24.82648090687368,
+      "lng": 67.07237297136133,
+      "neighborhood": "DHA"
+    },
+    "verified": true,
+    "experience_years": 10
+  },
+  {
+    "id": "aa9d9428-09e6-49aa-9c44-e945b4d8d01a",
+    "full_name": "Bilal Raza",
+    "service_type": "Plumber",
+    "rating": 4.5,
+    "reliability_score": 74,
+    "cancellation_rate": 0.06,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.936489572485613,
+      "lng": 67.11052699822133,
+      "neighborhood": "Gulshan"
+    },
+    "verified": true,
+    "experience_years": 14
+  },
+  {
+    "id": "9ab07e70-4fed-489d-bb7b-04c5892d3d27",
+    "full_name": "Ahmed Ahmed",
+    "service_type": "Plumber",
+    "rating": 3.7,
+    "reliability_score": 92,
+    "cancellation_rate": 0.02,
+    "base_rate": 800,
+    "location": {
+      "lat": 24.860614140275207,
+      "lng": 67.04051106162493,
+      "neighborhood": "PECHS"
+    },
+    "verified": true,
+    "experience_years": 5
+  },
+  {
+    "id": "bbbbd74e-7ed1-4ae8-8a3a-12e89e24adc6",
+    "full_name": "Kamran Ali",
+    "service_type": "Plumber",
+    "rating": 4.9,
+    "reliability_score": 72,
+    "cancellation_rate": 0.08,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.935789284115213,
+      "lng": 67.09184662567303,
+      "neighborhood": "Gulshan"
+    },
+    "verified": true,
+    "experience_years": 12
+  },
+  {
+    "id": "877a0856-9d71-41a9-aeb9-0f3a5580caa1",
+    "full_name": "Usman Ahmed",
+    "service_type": "Electrician",
+    "rating": 4.3,
+    "reliability_score": 99,
+    "cancellation_rate": 0.03,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.925420783437595,
+      "lng": 67.07819615733813,
+      "neighborhood": "Gulshan"
+    },
+    "verified": true,
+    "experience_years": 3
+  },
+  {
+    "id": "343fbfef-5e21-47a3-8dc5-81e546fc99b2",
+    "full_name": "Usman Ali",
+    "service_type": "Electrician",
+    "rating": 4.6,
+    "reliability_score": 82,
+    "cancellation_rate": 0.11,
+    "base_rate": 2000,
+    "location": {
+      "lat": 24.83907093455607,
+      "lng": 67.03629644268271,
+      "neighborhood": "Clifton"
+    },
+    "verified": true,
+    "experience_years": 1
+  },
+  {
+    "id": "63dc0555-03fc-45f9-a97e-711168d08c73",
+    "full_name": "Faisal Siddiqui",
+    "service_type": "Painter",
+    "rating": 4.5,
+    "reliability_score": 81,
+    "cancellation_rate": 0.07,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.94946038230698,
+      "lng": 67.06324269505095,
+      "neighborhood": "North Nazimabad"
+    },
+    "verified": false,
+    "experience_years": 13
+  },
+  {
+    "id": "ae02ae2e-ede3-4b13-80e1-9383d22c1414",
+    "full_name": "Hassan Sheikh",
+    "service_type": "AC Repair",
+    "rating": 4.2,
+    "reliability_score": 91,
+    "cancellation_rate": 0.11,
+    "base_rate": 800,
+    "location": {
+      "lat": 24.879660454366324,
+      "lng": 67.06383188697096,
+      "neighborhood": "PECHS"
+    },
+    "verified": true,
+    "experience_years": 14
+  },
+  {
+    "id": "52371c28-bac2-45bb-8f2a-f00659d8ee3e",
+    "full_name": "Bilal Ali",
+    "service_type": "Painter",
+    "rating": 4.9,
+    "reliability_score": 87,
+    "cancellation_rate": 0.02,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.923645344732954,
+      "lng": 67.06414217071703,
+      "neighborhood": "North Nazimabad"
+    },
+    "verified": true,
+    "experience_years": 12
+  },
+  {
+    "id": "6d0ab55f-0b3e-4843-8438-7f4304eac519",
+    "full_name": "Muhammad Sheikh",
+    "service_type": "Electrician",
+    "rating": 4.0,
+    "reliability_score": 84,
+    "cancellation_rate": 0.11,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.950778695270905,
+      "lng": 67.05742715284106,
+      "neighborhood": "North Nazimabad"
+    },
+    "verified": true,
+    "experience_years": 10
+  },
+  {
+    "id": "fca57c00-1a46-44d3-a81b-6f58e04be9c6",
+    "full_name": "Faisal Qureshi",
+    "service_type": "Painter",
+    "rating": 4.9,
+    "reliability_score": 80,
+    "cancellation_rate": 0.04,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.871779776468685,
+      "lng": 67.04560585297929,
+      "neighborhood": "PECHS"
+    },
+    "verified": true,
+    "experience_years": 11
+  },
+  {
+    "id": "c28d54f8-5cd6-4a44-b29e-5a486794bc6d",
+    "full_name": "Ahmed Ali",
+    "service_type": "Plumber",
+    "rating": 4.7,
+    "reliability_score": 77,
+    "cancellation_rate": 0.11,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.810402277756193,
+      "lng": 67.06165524058673,
+      "neighborhood": "DHA"
+    },
+    "verified": true,
+    "experience_years": 8
+  },
+  {
+    "id": "571be710-b572-4d5f-9aad-b777e9e3f2ed",
+    "full_name": "Usman Ahmed",
+    "service_type": "Plumber",
+    "rating": 4.9,
+    "reliability_score": 85,
+    "cancellation_rate": 0.1,
+    "base_rate": 2000,
+    "location": {
+      "lat": 24.920025434800923,
+      "lng": 67.10085128557064,
+      "neighborhood": "Gulshan"
+    },
+    "verified": false,
+    "experience_years": 4
+  },
+  {
+    "id": "2d364563-d552-4162-ae26-5b919ff85f2d",
+    "full_name": "Muhammad Ahmed",
+    "service_type": "AC Repair",
+    "rating": 4.1,
+    "reliability_score": 80,
+    "cancellation_rate": 0.1,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.823996717658012,
+      "lng": 67.0476860485443,
+      "neighborhood": "DHA"
+    },
+    "verified": false,
+    "experience_years": 12
+  },
+  {
+    "id": "bd49d41c-b137-46e3-a2eb-71ed6bcbcb22",
+    "full_name": "Hassan Sheikh",
+    "service_type": "Painter",
+    "rating": 4.2,
+    "reliability_score": 89,
+    "cancellation_rate": 0.14,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.81807603711631,
+      "lng": 67.0429793948838,
+      "neighborhood": "Clifton"
+    },
+    "verified": false,
+    "experience_years": 14
+  },
+  {
+    "id": "e740c7b9-e1b0-401b-9866-219ef689dcfb",
+    "full_name": "Bilal Khan",
+    "service_type": "Painter",
+    "rating": 4.5,
+    "reliability_score": 98,
+    "cancellation_rate": 0.12,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.826413795040526,
+      "lng": 67.06894018292715,
+      "neighborhood": "DHA"
+    },
+    "verified": true,
+    "experience_years": 14
+  },
+  {
+    "id": "8c55ef44-f151-45cf-9038-e0aa3c866217",
+    "full_name": "Ali Qureshi",
+    "service_type": "Plumber",
+    "rating": 3.6,
+    "reliability_score": 85,
+    "cancellation_rate": 0.0,
+    "base_rate": 1000,
+    "location": {
+      "lat": 24.929518145805417,
+      "lng": 67.10678326969986,
+      "neighborhood": "Gulshan"
+    },
+    "verified": true,
+    "experience_years": 1
+  },
+  {
+    "id": "d266052a-9959-42a1-a83d-0909b394e062",
+    "full_name": "Hamza Ali",
+    "service_type": "Electrician",
+    "rating": 4.5,
+    "reliability_score": 80,
+    "cancellation_rate": 0.02,
+    "base_rate": 800,
+    "location": {
+      "lat": 24.811968411048568,
+      "lng": 67.08521627515151,
+      "neighborhood": "DHA"
+    },
+    "verified": true,
+    "experience_years": 13
+  },
+  {
+    "id": "66559b6b-93fb-44c2-b747-1ec7c794b2a0",
+    "full_name": "Muhammad Siddiqui",
+    "service_type": "Electrician",
+    "rating": 4.8,
+    "reliability_score": 89,
+    "cancellation_rate": 0.06,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.85244077847788,
+      "lng": 67.06290579241504,
+      "neighborhood": "PECHS"
+    },
+    "verified": false,
+    "experience_years": 15
+  },
+  {
+    "id": "76b1a398-564a-40fa-8566-d194787a6489",
+    "full_name": "Zubair Siddiqui",
+    "service_type": "Painter",
+    "rating": 4.8,
+    "reliability_score": 99,
+    "cancellation_rate": 0.14,
+    "base_rate": 800,
+    "location": {
+      "lat": 24.936934952139836,
+      "lng": 67.04536290148305,
+      "neighborhood": "North Nazimabad"
+    },
+    "verified": true,
+    "experience_years": 9
+  },
+  {
+    "id": "c0c9756b-7936-477e-9b82-4203f6835459",
+    "full_name": "Muhammad Malik",
+    "service_type": "AC Repair",
+    "rating": 3.7,
+    "reliability_score": 90,
+    "cancellation_rate": 0.14,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.824210832935318,
+      "lng": 67.0867774984598,
+      "neighborhood": "DHA"
+    },
+    "verified": true,
+    "experience_years": 14
+  },
+  {
+    "id": "d9ac8361-076c-48bf-8de3-b7842b1ed8f6",
+    "full_name": "Hamza Malik",
+    "service_type": "Painter",
+    "rating": 3.6,
+    "reliability_score": 84,
+    "cancellation_rate": 0.03,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.86521277197542,
+      "lng": 67.03574968738542,
+      "neighborhood": "PECHS"
+    },
+    "verified": false,
+    "experience_years": 2
+  },
+  {
+    "id": "57fa3a22-13d9-4a42-8a4e-d7347d655673",
+    "full_name": "Faisal Raza",
+    "service_type": "Painter",
+    "rating": 4.5,
+    "reliability_score": 89,
+    "cancellation_rate": 0.1,
+    "base_rate": 1000,
+    "location": {
+      "lat": 24.90498050831767,
+      "lng": 67.08964191093388,
+      "neighborhood": "Gulshan"
+    },
+    "verified": true,
+    "experience_years": 12
+  },
+  {
+    "id": "daaa01de-3511-49e7-b401-bc6e89b1da9d",
+    "full_name": "Ali Khan",
+    "service_type": "AC Repair",
+    "rating": 4.1,
+    "reliability_score": 94,
+    "cancellation_rate": 0.08,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.918209988602765,
+      "lng": 67.08263204496731,
+      "neighborhood": "Gulshan"
+    },
+    "verified": true,
+    "experience_years": 4
+  },
+  {
+    "id": "f3603368-ed33-4855-a860-dc2d2a3e6d38",
+    "full_name": "Ahmed Ali",
+    "service_type": "AC Repair",
+    "rating": 3.7,
+    "reliability_score": 98,
+    "cancellation_rate": 0.04,
+    "base_rate": 1000,
+    "location": {
+      "lat": 24.929648392654197,
+      "lng": 67.11115057332346,
+      "neighborhood": "Gulshan"
+    },
+    "verified": false,
+    "experience_years": 14
+  },
+  {
+    "id": "f2d88bb1-8ea0-4743-a343-a9b50f589eda",
+    "full_name": "Hassan Sheikh",
+    "service_type": "Painter",
+    "rating": 4.7,
+    "reliability_score": 99,
+    "cancellation_rate": 0.09,
+    "base_rate": 1000,
+    "location": {
+      "lat": 24.81135484907072,
+      "lng": 67.02027940205933,
+      "neighborhood": "Clifton"
+    },
+    "verified": true,
+    "experience_years": 11
+  },
+  {
+    "id": "a5884f08-b1c4-4550-8edc-a48cb0baeb61",
+    "full_name": "Hassan Ali",
+    "service_type": "Electrician",
+    "rating": 4.5,
+    "reliability_score": 86,
+    "cancellation_rate": 0.11,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.936780457223406,
+      "lng": 67.06137659012461,
+      "neighborhood": "North Nazimabad"
+    },
+    "verified": false,
+    "experience_years": 5
+  },
+  {
+    "id": "e46bac11-159d-4c1e-ad57-77ca85b01de7",
+    "full_name": "Usman Qureshi",
+    "service_type": "Painter",
+    "rating": 4.5,
+    "reliability_score": 87,
+    "cancellation_rate": 0.02,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.915486551645905,
+      "lng": 67.0565962198776,
+      "neighborhood": "North Nazimabad"
+    },
+    "verified": false,
+    "experience_years": 1
+  },
+  {
+    "id": "801141ff-eaed-45eb-94c6-6553585e5852",
+    "full_name": "Hamza Qureshi",
+    "service_type": "Plumber",
+    "rating": 3.9,
+    "reliability_score": 94,
+    "cancellation_rate": 0.09,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.80636792536621,
+      "lng": 67.08631225326434,
+      "neighborhood": "DHA"
+    },
+    "verified": true,
+    "experience_years": 9
+  },
+  {
+    "id": "fa523ccc-0ef6-45aa-8dbf-a4c1100ade98",
+    "full_name": "Hassan Ahmed",
+    "service_type": "Plumber",
+    "rating": 3.8,
+    "reliability_score": 98,
+    "cancellation_rate": 0.11,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.935682124243854,
+      "lng": 67.05490084625347,
+      "neighborhood": "North Nazimabad"
+    },
+    "verified": true,
+    "experience_years": 3
+  },
+  {
+    "id": "eaf1a40b-6e97-4947-a5b2-cf5c525b4fc1",
+    "full_name": "Hassan Khan",
+    "service_type": "AC Repair",
+    "rating": 4.6,
+    "reliability_score": 83,
+    "cancellation_rate": 0.05,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.867453069051095,
+      "lng": 67.03926766108134,
+      "neighborhood": "PECHS"
+    },
+    "verified": false,
+    "experience_years": 15
+  },
+  {
+    "id": "5414872e-d322-4b2d-8060-131c43b42d13",
+    "full_name": "Kamran Ali",
+    "service_type": "Painter",
+    "rating": 3.7,
+    "reliability_score": 94,
+    "cancellation_rate": 0.11,
+    "base_rate": 1500,
+    "location": {
+      "lat": 24.839355809931156,
+      "lng": 67.037660835026,
+      "neighborhood": "Clifton"
+    },
+    "verified": true,
+    "experience_years": 8
+  },
+  {
+    "id": "35cecb7b-4579-454e-a7de-5a9e57a9d27c",
+    "full_name": "Faisal Khan",
+    "service_type": "Plumber",
+    "rating": 4.4,
+    "reliability_score": 81,
+    "cancellation_rate": 0.08,
+    "base_rate": 800,
+    "location": {
+      "lat": 24.823830461162018,
+      "lng": 67.0716115931056,
+      "neighborhood": "DHA"
+    },
+    "verified": true,
+    "experience_years": 13
+  },
+  {
+    "id": "aa316c8d-bc46-43c7-ad10-b7cb80390fb9",
+    "full_name": "Hamza Sheikh",
+    "service_type": "Electrician",
+    "rating": 4.2,
+    "reliability_score": 75,
+    "cancellation_rate": 0.01,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.828881903465007,
+      "lng": 67.04283411673609,
+      "neighborhood": "Clifton"
+    },
+    "verified": true,
+    "experience_years": 11
+  },
+  {
+    "id": "fd0b0bbe-a53f-4d6d-b5d0-2739aec3539e",
+    "full_name": "Hassan Khan",
+    "service_type": "Electrician",
+    "rating": 3.9,
+    "reliability_score": 97,
+    "cancellation_rate": 0.02,
+    "base_rate": 800,
+    "location": {
+      "lat": 24.854157539257077,
+      "lng": 67.04876920301876,
+      "neighborhood": "PECHS"
+    },
+    "verified": true,
+    "experience_years": 12
+  },
+  {
+    "id": "9a64edb4-a37b-4bd6-81e7-18e2ab7473a6",
+    "full_name": "Zubair Ahmed",
+    "service_type": "Electrician",
+    "rating": 4.3,
+    "reliability_score": 75,
+    "cancellation_rate": 0.13,
+    "base_rate": 2000,
+    "location": {
+      "lat": 24.813313790804305,
+      "lng": 67.01772964948556,
+      "neighborhood": "Clifton"
+    },
+    "verified": false,
+    "experience_years": 3
+  },
+  {
+    "id": "cf5fc0b6-5ccc-4d41-ae5f-a59f7470cab3",
+    "full_name": "Muhammad Sheikh",
+    "service_type": "AC Repair",
+    "rating": 3.9,
+    "reliability_score": 84,
+    "cancellation_rate": 0.06,
+    "base_rate": 1000,
+    "location": {
+      "lat": 24.862941915374066,
+      "lng": 67.0598743261998,
+      "neighborhood": "PECHS"
+    },
+    "verified": true,
+    "experience_years": 11
+  },
+  {
+    "id": "1568c32d-2723-497a-b860-33e4eb1056bd",
+    "full_name": "Hassan Ahmed",
+    "service_type": "Electrician",
+    "rating": 4.1,
+    "reliability_score": 90,
+    "cancellation_rate": 0.13,
+    "base_rate": 1200,
+    "location": {
+      "lat": 24.801178398769114,
+      "lng": 67.05000770595404,
+      "neighborhood": "DHA"
+    },
+    "verified": true,
+    "experience_years": 12
+  },
+  {
+    "id": "fc94f856-6624-4ac5-9f4d-be8c1654f784",
+    "full_name": "Hamza Khan",
+    "service_type": "Electrician",
+    "rating": 4.2,
+    "reliability_score": 95,
+    "cancellation_rate": 0.14,
+    "base_rate": 1000,
+    "location": {
+      "lat": 24.92108019674917,
+      "lng": 67.08319065508677,
+      "neighborhood": "Gulshan"
+    },
+    "verified": true,
+    "experience_years": 6
+  },
+  {
+    "id": "e30256fb-0540-49be-95d6-462d00015688",
+    "full_name": "Hassan Raza",
+    "service_type": "Painter",
+    "rating": 4.5,
+    "reliability_score": 82,
+    "cancellation_rate": 0.08,
+    "base_rate": 800,
+    "location": {
+      "lat": 24.924220199874185,
+      "lng": 67.03694161830101,
+      "neighborhood": "North Nazimabad"
+    },
+    "verified": true,
+    "experience_years": 4
+  }
+]

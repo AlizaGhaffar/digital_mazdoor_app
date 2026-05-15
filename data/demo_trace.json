@@ -1,0 +1,451 @@
+{
+  "final_context": {
+    "raw_input": "Mujhe kal subah Gulshan mein AC technician chahiye budget kam hai",
+    "intent": {
+      "service_type": "AC Repair",
+      "location_name": "Gulshan",
+      "urgency": "Low",
+      "parsed_successfully": true
+    },
+    "context_enrichment": {
+      "user_profile": {
+        "preferred_language": "Urdu",
+        "is_premium": false,
+        "previous_services": [
+          "AC Repair"
+        ],
+        "avg_budget": "Medium"
+      },
+      "environment": {
+        "time_of_day": "Morning",
+        "weather": "Hot"
+      }
+    },
+    "matches": [
+      {
+        "id": "daaa01de-3511-49e7-b401-bc6e89b1da9d",
+        "full_name": "Ali Khan",
+        "service_type": "AC Repair",
+        "rating": 4.1,
+        "reliability_score": 94,
+        "cancellation_rate": 0.08,
+        "base_rate": 1500,
+        "location": {
+          "lat": 24.918209988602765,
+          "lng": 67.08263204496731,
+          "neighborhood": "Gulshan"
+        },
+        "verified": true,
+        "experience_years": 4
+      },
+      {
+        "id": "f3603368-ed33-4855-a860-dc2d2a3e6d38",
+        "full_name": "Ahmed Ali",
+        "service_type": "AC Repair",
+        "rating": 3.7,
+        "reliability_score": 98,
+        "cancellation_rate": 0.04,
+        "base_rate": 1000,
+        "location": {
+          "lat": 24.929648392654197,
+          "lng": 67.11115057332346,
+          "neighborhood": "Gulshan"
+        },
+        "verified": false,
+        "experience_years": 14
+      }
+    ],
+    "ranked_providers": [
+      {
+        "id": "f3603368-ed33-4855-a860-dc2d2a3e6d38",
+        "full_name": "Ahmed Ali",
+        "service_type": "AC Repair",
+        "rating": 3.7,
+        "reliability_score": 98,
+        "cancellation_rate": 0.04,
+        "base_rate": 1000,
+        "location": {
+          "lat": 24.929648392654197,
+          "lng": 67.11115057332346,
+          "neighborhood": "Gulshan"
+        },
+        "verified": false,
+        "experience_years": 14,
+        "orchestrator_score": 94.4
+      },
+      {
+        "id": "daaa01de-3511-49e7-b401-bc6e89b1da9d",
+        "full_name": "Ali Khan",
+        "service_type": "AC Repair",
+        "rating": 4.1,
+        "reliability_score": 94,
+        "cancellation_rate": 0.08,
+        "base_rate": 1500,
+        "location": {
+          "lat": 24.918209988602765,
+          "lng": 67.08263204496731,
+          "neighborhood": "Gulshan"
+        },
+        "verified": true,
+        "experience_years": 4,
+        "orchestrator_score": 77.2
+      }
+    ],
+    "top_match": {
+      "id": "f3603368-ed33-4855-a860-dc2d2a3e6d38",
+      "full_name": "Ahmed Ali",
+      "service_type": "AC Repair",
+      "rating": 3.7,
+      "reliability_score": 98,
+      "cancellation_rate": 0.04,
+      "base_rate": 1000,
+      "location": {
+        "lat": 24.929648392654197,
+        "lng": 67.11115057332346,
+        "neighborhood": "Gulshan"
+      },
+      "verified": false,
+      "experience_years": 14,
+      "orchestrator_score": 94.4
+    },
+    "schedule": {
+      "estimated_arrival": "2026-05-14T18:44:30.323996",
+      "duration_minutes": 60,
+      "status": "available"
+    },
+    "pricing": {
+      "final_price": 900,
+      "currency": "PKR",
+      "breakdown": {
+        "base": 1000,
+        "adjustment": -100
+      }
+    },
+    "booking": {
+      "id": "BK-F1FCB39F",
+      "status": "confirmed",
+      "provider_id": "f3603368-ed33-4855-a860-dc2d2a3e6d38",
+      "total_price": 900,
+      "arrival_time": "2026-05-14T18:44:30.323996"
+    },
+    "notifications": [
+      {
+        "to": "user",
+        "channel": "sms",
+        "content": "Assalam-o-Alaikum! Your booking (BK-F1FCB39F) for AC Repair is confirmed. Ahmed Ali will arrive at 2026-05-14T18:44:30.323996.",
+        "status": "sent"
+      },
+      {
+        "to": "provider",
+        "channel": "whatsapp",
+        "content": "New Job Alert! Booking BK-F1FCB39F in Gulshan. Customer needs AC Repair. Estimated Pay: 900 PKR.",
+        "status": "sent"
+      }
+    ],
+    "followup": {
+      "status": "completed",
+      "feedback": {
+        "rating": 5,
+        "comment": "Bohat acha kaam kiya, time pe aye.",
+        "completion_status": "success"
+      }
+    },
+    "reliability_update": {
+      "provider_id": "f3603368-ed33-4855-a860-dc2d2a3e6d38",
+      "old_score": 98,
+      "new_score": 99
+    },
+    "optimizations": [
+      "Consider joining the 'Quality Skills Workshop'."
+    ]
+  },
+  "all_traces": [
+    {
+      "agent_id": "intent_agent",
+      "timestamp": "2026-05-14T17:44:30.321197",
+      "status": "success",
+      "reasoning_logic": [
+        "Analyzing raw input: 'mujhe kal subah gulshan mein ac technician chahiye budget kam hai'",
+        "Detected service keyword: 'AC'",
+        "Detected location: 'Gulshan'",
+        "Detected price sensitivity/low urgency"
+      ],
+      "decision": {
+        "intent": {
+          "service_type": "AC Repair",
+          "location_name": "Gulshan",
+          "urgency": "Low",
+          "parsed_successfully": true
+        }
+      }
+    },
+    {
+      "agent_id": "context_agent",
+      "timestamp": "2026-05-14T17:44:30.321750",
+      "status": "success",
+      "reasoning_logic": [
+        "Retrieving user profile and historical preferences...",
+        "User profile loaded. Preferred language: Urdu",
+        "User has requested this service before. Prioritizing familiar providers if available."
+      ],
+      "decision": {
+        "context_enrichment": {
+          "user_profile": {
+            "preferred_language": "Urdu",
+            "is_premium": false,
+            "previous_services": [
+              "AC Repair"
+            ],
+            "avg_budget": "Medium"
+          },
+          "environment": {
+            "time_of_day": "Morning",
+            "weather": "Hot"
+          }
+        }
+      }
+    },
+    {
+      "agent_id": "matching_agent",
+      "timestamp": "2026-05-14T17:44:30.323432",
+      "status": "success",
+      "reasoning_logic": [
+        "Searching for 'AC Repair' in 'Gulshan'...",
+        "Found 2 initial candidates."
+      ],
+      "decision": {
+        "matches": [
+          {
+            "id": "daaa01de-3511-49e7-b401-bc6e89b1da9d",
+            "full_name": "Ali Khan",
+            "service_type": "AC Repair",
+            "rating": 4.1,
+            "reliability_score": 94,
+            "cancellation_rate": 0.08,
+            "base_rate": 1500,
+            "location": {
+              "lat": 24.918209988602765,
+              "lng": 67.08263204496731,
+              "neighborhood": "Gulshan"
+            },
+            "verified": true,
+            "experience_years": 4
+          },
+          {
+            "id": "f3603368-ed33-4855-a860-dc2d2a3e6d38",
+            "full_name": "Ahmed Ali",
+            "service_type": "AC Repair",
+            "rating": 3.7,
+            "reliability_score": 98,
+            "cancellation_rate": 0.04,
+            "base_rate": 1000,
+            "location": {
+              "lat": 24.929648392654197,
+              "lng": 67.11115057332346,
+              "neighborhood": "Gulshan"
+            },
+            "verified": false,
+            "experience_years": 14
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "ranking_agent",
+      "timestamp": "2026-05-14T17:44:30.323767",
+      "status": "success",
+      "reasoning_logic": [
+        "Ranking 2 candidates using multi-factor scoring.",
+        "Top provider identified: Ahmed Ali with score 94.4.",
+        "Ranking Factors: Rating (3.7/5), Reliability (98%), Experience (14 years)."
+      ],
+      "decision": {
+        "ranked_providers": [
+          {
+            "id": "f3603368-ed33-4855-a860-dc2d2a3e6d38",
+            "full_name": "Ahmed Ali",
+            "service_type": "AC Repair",
+            "rating": 3.7,
+            "reliability_score": 98,
+            "cancellation_rate": 0.04,
+            "base_rate": 1000,
+            "location": {
+              "lat": 24.929648392654197,
+              "lng": 67.11115057332346,
+              "neighborhood": "Gulshan"
+            },
+            "verified": false,
+            "experience_years": 14,
+            "orchestrator_score": 94.4
+          },
+          {
+            "id": "daaa01de-3511-49e7-b401-bc6e89b1da9d",
+            "full_name": "Ali Khan",
+            "service_type": "AC Repair",
+            "rating": 4.1,
+            "reliability_score": 94,
+            "cancellation_rate": 0.08,
+            "base_rate": 1500,
+            "location": {
+              "lat": 24.918209988602765,
+              "lng": 67.08263204496731,
+              "neighborhood": "Gulshan"
+            },
+            "verified": true,
+            "experience_years": 4,
+            "orchestrator_score": 77.2
+          }
+        ],
+        "top_match": {
+          "id": "f3603368-ed33-4855-a860-dc2d2a3e6d38",
+          "full_name": "Ahmed Ali",
+          "service_type": "AC Repair",
+          "rating": 3.7,
+          "reliability_score": 98,
+          "cancellation_rate": 0.04,
+          "base_rate": 1000,
+          "location": {
+            "lat": 24.929648392654197,
+            "lng": 67.11115057332346,
+            "neighborhood": "Gulshan"
+          },
+          "verified": false,
+          "experience_years": 14,
+          "orchestrator_score": 94.4
+        }
+      }
+    },
+    {
+      "agent_id": "scheduling_agent",
+      "timestamp": "2026-05-14T17:44:30.324016",
+      "status": "success",
+      "reasoning_logic": [
+        "Verifying availability for Ahmed Ali...",
+        "Provider location: Gulshan. Calculated travel time: 30 mins.",
+        "Added 15 mins buffer for traffic."
+      ],
+      "decision": {
+        "schedule": {
+          "estimated_arrival": "2026-05-14T18:44:30.323996",
+          "duration_minutes": 60,
+          "status": "available"
+        }
+      }
+    },
+    {
+      "agent_id": "pricing_agent",
+      "timestamp": "2026-05-14T17:44:30.324216",
+      "status": "success",
+      "reasoning_logic": [
+        "Base rate for Ahmed Ali: 1000 PKR",
+        "Applied 10% 'Budget' discount."
+      ],
+      "decision": {
+        "pricing": {
+          "final_price": 900,
+          "currency": "PKR",
+          "breakdown": {
+            "base": 1000,
+            "adjustment": -100
+          }
+        }
+      }
+    },
+    {
+      "agent_id": "booking_agent",
+      "timestamp": "2026-05-14T17:44:30.324467",
+      "status": "success",
+      "reasoning_logic": [
+        "Initiating booking for Ahmed Ali...",
+        "Finalizing price at 900 PKR.",
+        "Database transaction successful. Booking ID: BK-F1FCB39F",
+        "Slot locked in provider's calendar."
+      ],
+      "decision": {
+        "booking": {
+          "id": "BK-F1FCB39F",
+          "status": "confirmed",
+          "provider_id": "f3603368-ed33-4855-a860-dc2d2a3e6d38",
+          "total_price": 900,
+          "arrival_time": "2026-05-14T18:44:30.323996"
+        }
+      }
+    },
+    {
+      "agent_id": "notification_agent",
+      "timestamp": "2026-05-14T17:44:30.324627",
+      "status": "success",
+      "reasoning_logic": [
+        "Preparing notification payloads...",
+        "Mocking SMS to User: 'Assalam-o-Alaikum! Your booking (BK-F1FCB39F) for AC Repair is confirmed. Ahmed Ali will arrive at 2026-05-14T18:44:30.323996.'",
+        "Mocking WhatsApp to Provider: 'New Job Alert! Booking BK-F1FCB39F in Gulshan. Customer needs AC Repair. Estimated Pay: 900 PKR.'"
+      ],
+      "decision": {
+        "notifications": [
+          {
+            "to": "user",
+            "channel": "sms",
+            "content": "Assalam-o-Alaikum! Your booking (BK-F1FCB39F) for AC Repair is confirmed. Ahmed Ali will arrive at 2026-05-14T18:44:30.323996.",
+            "status": "sent"
+          },
+          {
+            "to": "provider",
+            "channel": "whatsapp",
+            "content": "New Job Alert! Booking BK-F1FCB39F in Gulshan. Customer needs AC Repair. Estimated Pay: 900 PKR.",
+            "status": "sent"
+          }
+        ]
+      }
+    },
+    {
+      "agent_id": "followup_agent",
+      "timestamp": "2026-05-14T17:44:30.324785",
+      "status": "success",
+      "reasoning_logic": [
+        "Scheduling follow-up for Booking BK-F1FCB39F...",
+        "Simulating 'Job Completion' trigger from provider.",
+        "Feedback received: 5/5 stars. 'Bohat acha kaam kiya, time pe aye.'"
+      ],
+      "decision": {
+        "followup": {
+          "status": "completed",
+          "feedback": {
+            "rating": 5,
+            "comment": "Bohat acha kaam kiya, time pe aye.",
+            "completion_status": "success"
+          }
+        }
+      }
+    },
+    {
+      "agent_id": "reliability_agent",
+      "timestamp": "2026-05-14T17:44:30.324946",
+      "status": "success",
+      "reasoning_logic": [
+        "Analyzing performance for Ahmed Ali...",
+        "Job successful. Incrementing reliability score: 98 -> 99"
+      ],
+      "decision": {
+        "reliability_update": {
+          "provider_id": "f3603368-ed33-4855-a860-dc2d2a3e6d38",
+          "old_score": 98,
+          "new_score": 99
+        }
+      }
+    },
+    {
+      "agent_id": "provider_opt_agent",
+      "timestamp": "2026-05-14T17:44:30.325112",
+      "status": "success",
+      "reasoning_logic": [
+        "Analyzing growth opportunities for Ahmed Ali...",
+        "Rating is below average. Suggesting training."
+      ],
+      "decision": {
+        "optimizations": [
+          "Consider joining the 'Quality Skills Workshop'."
+        ]
+      }
+    }
+  ]
+}
