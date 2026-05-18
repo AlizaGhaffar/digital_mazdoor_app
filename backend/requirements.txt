@@ -1,12 +1,12 @@
-fastapi==0.111.0
-uvicorn==0.30.1
-pydantic==2.7.4
-pydantic-settings==2.3.1
-supabase==2.5.1
-python-dotenv==1.0.1
-httpx==0.27.0
-pytest==8.2.2
-python-multipart==0.0.9
-pytz==2024.1
+fastapi
+uvicorn
+pydantic
+pydantic-settings
+supabase
+python-dotenv
+httpx
+pytest
+python-multipart
+pytz
 # Note: google-antigravity is a placeholder/simulated for this environment
 # if it's an internal package, we assume it's available or we'll mock its interfaces.

@@ -1,10 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native';
-import { Brain, Star, MapPin, DollarSign, CheckCircle, Info, ChevronRight } from 'lucide-react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { Brain, Star, MapPin, CheckCircle, Info, ChevronRight } from 'lucide-react-native';
 import { useGlobalState } from '../store/GlobalContext';
+import { useTheme } from '../store/ThemeContext';
 
 export default function ResultsScreen({ navigation }) {
   const { workflowContext, setCurrentBooking } = useGlobalState();
+  const { colors, isDark } = useTheme();
+  
   const intent = workflowContext?.intent || {};
   const providers = workflowContext?.ranked_providers || [];
 
@@ -20,60 +23,62 @@ export default function ResultsScreen({ navigation }) {
 
   if (!workflowContext) {
     return (
-      <View style={styles.emptyContainer}>
-        <Info size={48} color="#CBD5E0" />
-        <Text style={styles.emptyText}>No analysis results found.</Text>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Text style={styles.backButtonText}>Go Back</Text>
+      <View style={[styles.emptyContainer, { backgroundColor: colors.background }]}>
+        <Info size={48} color={colors.icon} />
+        <Text style={[styles.emptyText, { color: colors.textSecondary }]}>No analysis results found.</Text>
+        <TouchableOpacity style={[styles.backButton, { backgroundColor: colors.primary }]} onPress={() => navigation.goBack()}>
+          <Text style={[styles.backButtonText, { color: colors.buttonText }]}>Go Back</Text>
         </TouchableOpacity>
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* AI Analysis Summary */}
-        <View style={styles.analysisCard}>
+        <View style={[styles.analysisCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
           <View style={styles.cardHeader}>
-            <Brain size={24} color="#4A90E2" />
-            <Text style={styles.cardTitle}>AI Orchestrator Analysis</Text>
+            <View style={[styles.iconBg, { backgroundColor: colors.primaryLight }]}>
+               <Brain size={24} color={colors.primary} />
+            </View>
+            <Text style={[styles.cardTitle, { color: colors.text }]}>AI Orchestrator Analysis</Text>
           </View>
           
           <View style={styles.intentGrid}>
             <View style={styles.intentItem}>
-              <Text style={styles.intentLabel}>Service</Text>
-              <Text style={styles.intentValue}>{intent.service_type}</Text>
+              <Text style={[styles.intentLabel, { color: colors.textSecondary }]}>Service</Text>
+              <Text style={[styles.intentValue, { color: colors.text }]}>{intent.service_type}</Text>
             </View>
             <View style={styles.intentItem}>
-              <Text style={styles.intentLabel}>Location</Text>
-              <Text style={styles.intentValue}>{intent.location_name}</Text>
+              <Text style={[styles.intentLabel, { color: colors.textSecondary }]}>Location</Text>
+              <Text style={[styles.intentValue, { color: colors.text }]}>{intent.location_name}</Text>
             </View>
             <View style={styles.intentItem}>
-              <Text style={styles.intentLabel}>Urgency</Text>
-              <Text style={styles.intentValue}>{intent.urgency}</Text>
+              <Text style={[styles.intentLabel, { color: colors.textSecondary }]}>Urgency</Text>
+              <Text style={[styles.intentValue, { color: colors.text }]}>{intent.urgency}</Text>
             </View>
             <View style={styles.intentItem}>
-              <Text style={styles.intentLabel}>Confidence</Text>
-              <Text style={[styles.intentValue, { color: intent.confidence > 0.7 ? '#48BB78' : '#ECC94B' }]}>
+              <Text style={[styles.intentLabel, { color: colors.textSecondary }]}>Confidence</Text>
+              <Text style={[styles.intentValue, { color: intent.confidence > 0.7 ? colors.success : colors.warning }]}>
                 {(intent.confidence * 100).toFixed(0)}%
               </Text>
             </View>
           </View>
 
           <TouchableOpacity 
-            style={styles.traceButton}
+            style={[styles.traceButton, { borderTopColor: colors.border }]}
             onPress={() => navigation.navigate('Trace')}
           >
-            <Text style={styles.traceButtonText}>View AI Reasoning Trace</Text>
-            <ChevronRight size={16} color="#4A90E2" />
+            <Text style={[styles.traceButtonText, { color: colors.primary }]}>View AI Reasoning Trace</Text>
+            <ChevronRight size={18} color={colors.primary} />
           </TouchableOpacity>
         </View>
 
         {/* Recommended Providers */}
         <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Recommended Providers</Text>
-          <Text style={styles.sectionSubtitle}>
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>Recommended Providers</Text>
+          <Text style={[styles.sectionSubtitle, { color: colors.textSecondary }]}>
             Ranked by AI considering distance, reliability, urgency, and pricing.
           </Text>
         </View>
@@ -81,34 +86,38 @@ export default function ResultsScreen({ navigation }) {
         {providers.map((item, index) => (
           <TouchableOpacity 
             key={item.id} 
-            style={[styles.providerCard, index === 0 && styles.topMatch]}
+            style={[
+              styles.providerCard, 
+              { backgroundColor: colors.card, borderColor: index === 0 ? colors.primary : colors.border }
+            ]}
             onPress={() => handleSelectProvider(item)}
+            activeOpacity={0.9}
           >
             {index === 0 && (
-              <View style={styles.badge}>
-                <CheckCircle size={12} color="#FFFFFF" />
+              <View style={[styles.badge, { backgroundColor: colors.primary }]}>
+                <CheckCircle size={14} color="#FFFFFF" />
                 <Text style={styles.badgeText}>BEST MATCH</Text>
               </View>
             )}
             
             <View style={styles.providerHeader}>
               <View>
-                <Text style={styles.providerName}>{item.full_name}</Text>
+                <Text style={[styles.providerName, { color: colors.text }]}>{item.full_name}</Text>
                 <View style={styles.ratingRow}>
-                  <Star size={14} color="#F6AD55" fill="#F6AD55" />
-                  <Text style={styles.ratingText}>{item.rating} ({item.reliability_score}% Reliable)</Text>
+                  <Star size={16} color={colors.warning} fill={colors.warning} />
+                  <Text style={[styles.ratingText, { color: colors.textSecondary }]}>{item.rating} ({item.reliability_score}% Reliable)</Text>
                 </View>
               </View>
-              <Text style={styles.priceText}>Rs. {item.base_rate}</Text>
+              <Text style={[styles.priceText, { color: colors.primary }]}>Rs. {item.base_rate}</Text>
             </View>
 
-            <View style={styles.providerFooter}>
+            <View style={[styles.providerFooter, { borderTopColor: colors.border }]}>
               <View style={styles.metaItem}>
-                <MapPin size={12} color="#718096" />
-                <Text style={styles.metaText}>{item.location.neighborhood}</Text>
+                <MapPin size={16} color={colors.icon} />
+                <Text style={[styles.metaText, { color: colors.textSecondary }]}>{item.location.neighborhood}</Text>
               </View>
-              <View style={styles.scoreBadge}>
-                <Text style={styles.scoreText}>AI Score: {item.orchestrator_score}</Text>
+              <View style={[styles.scoreBadge, { backgroundColor: colors.inputBg }]}>
+                <Text style={[styles.scoreText, { color: colors.text }]}>AI Score: {item.orchestrator_score}</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -123,7 +132,6 @@ export default function ResultsScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
     paddingHorizontal: 20,
   },
   emptyContainer: {
@@ -133,173 +141,170 @@ const styles = StyleSheet.create({
     padding: 40,
   },
   emptyText: {
-    marginTop: 10,
-    color: '#718096',
+    marginTop: 16,
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  backButton: {
+    marginTop: 24,
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 20,
+  },
+  backButtonText: {
+    fontWeight: 'bold',
     fontSize: 16,
   },
   analysisCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 20,
+    borderRadius: 24,
+    padding: 24,
     marginTop: 20,
-    marginBottom: 25,
-    elevation: 2,
+    marginBottom: 30,
+    borderWidth: 1,
+    elevation: 4,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
-    shadowRadius: 2,
+    shadowRadius: 10,
   },
   cardHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 24,
+  },
+  iconBg: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   cardTitle: {
-    marginLeft: 10,
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#2D3748',
+    marginLeft: 16,
+    fontSize: 20,
+    fontWeight: '800',
   },
   intentGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: 15,
+    marginBottom: 20,
   },
   intentItem: {
     width: '50%',
-    marginBottom: 15,
+    marginBottom: 20,
   },
   intentLabel: {
     fontSize: 12,
-    color: '#718096',
     textTransform: 'uppercase',
     letterSpacing: 1,
-    marginBottom: 4,
+    fontWeight: '600',
+    marginBottom: 6,
   },
   intentValue: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: '#2D3748',
+    fontSize: 16,
+    fontWeight: '700',
   },
   traceButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 10,
+    paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: '#F1F5F9',
   },
   traceButtonText: {
-    color: '#4A90E2',
-    fontWeight: 'bold',
-    marginRight: 5,
+    fontWeight: '700',
+    fontSize: 15,
+    marginRight: 6,
   },
   sectionHeader: {
-    marginBottom: 15,
+    marginBottom: 20,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#1A202C',
-    marginBottom: 4,
+    fontSize: 22,
+    fontWeight: '800',
+    marginBottom: 6,
   },
   sectionSubtitle: {
-    fontSize: 12,
-    color: '#718096',
+    fontSize: 14,
+    lineHeight: 20,
   },
   providerCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 15,
+    borderRadius: 20,
+    padding: 20,
+    marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
-  },
-  topMatch: {
-    borderColor: '#4A90E2',
-    borderWidth: 2,
-    backgroundColor: '#F0F7FF',
+    position: 'relative',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 5,
   },
   badge: {
     position: 'absolute',
-    top: -10,
-    right: 15,
-    backgroundColor: '#4A90E2',
+    top: -12,
+    right: 20,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 4,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+    elevation: 3,
   },
   badgeText: {
     color: '#FFFFFF',
     fontSize: 10,
-    fontWeight: 'bold',
+    fontWeight: '800',
     marginLeft: 4,
+    letterSpacing: 0.5,
   },
   providerHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: 12,
+    marginBottom: 16,
   },
   providerName: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#2D3748',
+    fontSize: 18,
+    fontWeight: '800',
+    marginBottom: 6,
   },
   ratingRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 2,
   },
   ratingText: {
-    fontSize: 12,
-    color: '#718096',
-    marginLeft: 5,
+    fontSize: 13,
+    fontWeight: '600',
+    marginLeft: 6,
   },
   priceText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#2D3748',
+    fontSize: 20,
+    fontWeight: '800',
   },
   providerFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: 12,
+    paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: '#F1F5F9',
   },
   metaItem: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   metaText: {
-    fontSize: 12,
-    color: '#718096',
-    marginLeft: 4,
+    fontSize: 14,
+    fontWeight: '500',
+    marginLeft: 6,
   },
   scoreBadge: {
-    backgroundColor: '#E2E8F0',
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
   },
   scoreText: {
-    fontSize: 10,
-    fontWeight: '600',
-    color: '#4A5568',
-  },
-  backButton: {
-    marginTop: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: '#4A90E2',
-    borderRadius: 8,
-  },
-  backButtonText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
+    fontSize: 12,
+    fontWeight: '700',
   },
 });

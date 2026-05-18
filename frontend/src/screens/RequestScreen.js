@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, ActivityIndicator, KeyboardAvoidingView, Platform, SafeAreaView } from 'react-native';
 import { Send, User, Bot, Brain } from 'lucide-react-native';
 import { orchestrate } from '../services/api';
 import { useGlobalState } from '../store/GlobalContext';
+import { useTheme } from '../store/ThemeContext';
 
 export default function RequestScreen({ route, navigation }) {
   const { initialService } = route.params || {};
   const [input, setInput] = useState(initialService ? `I need a ${initialService}` : '');
   const [fallbackResponse, setFallbackResponse] = useState('');
   const { updateWorkflow, setLoading, loading, userLocation } = useGlobalState();
+  const { colors, isDark } = useTheme();
   const scrollViewRef = useRef();
 
   const handleOrchestration = async () => {
@@ -32,7 +34,7 @@ export default function RequestScreen({ route, navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={[styles.safeArea, { backgroundColor: colors.background }]}>
       <KeyboardAvoidingView 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}
@@ -44,80 +46,82 @@ export default function RequestScreen({ route, navigation }) {
           contentContainerStyle={styles.scrollContent}
         >
           <View style={styles.chatContainer}>
+            {/* Initial Welcome Bubble */}
             <View style={styles.aiMessage}>
-              <View style={styles.avatar}>
+              <View style={[styles.avatar, { backgroundColor: colors.primary }]}>
                 <Bot size={20} color="#FFFFFF" />
               </View>
-              <View style={styles.bubble}>
-                <Text style={styles.aiText}>
+              <View style={[styles.bubble, { backgroundColor: colors.bubbleAI, borderColor: colors.border }]}>
+                <Text style={[styles.aiText, { color: colors.text }]}>
                   Assalam-o-Alaikum! I am your AI Orchestrator. Tell me what service you need today. 
                   {"\n\n"}
-                  <Text style={styles.hint}>Example: "AC kharab hai Gulshan me theek karwana hai" or "Plumber needed for kitchen leak in DHA".</Text>
+                  <Text style={[styles.hint, { color: colors.textSecondary }]}>Example: "AC kharab hai Gulshan me theek karwana hai" or "Plumber needed for kitchen leak in DHA".</Text>
                 </Text>
               </View>
             </View>
 
+            {/* User Message */}
             {input.length > 0 && !loading && (
               <View style={styles.userMessage}>
-                <View style={[styles.bubble, styles.userBubble]}>
+                <View style={[styles.bubble, styles.userBubble, { backgroundColor: colors.bubbleUser }]}>
                   <Text style={styles.userText}>{input}</Text>
-                </View>
-                <View style={[styles.avatar, styles.userAvatar]}>
-                  <User size={20} color="#FFFFFF" />
                 </View>
               </View>
             )}
-
+            
             {loading && (
               <View style={styles.userMessage}>
-                <View style={[styles.bubble, styles.userBubble]}>
+                <View style={[styles.bubble, styles.userBubble, { backgroundColor: colors.bubbleUser }]}>
                   <Text style={styles.userText}>{input}</Text>
                 </View>
-                <View style={[styles.avatar, styles.userAvatar]}>
-                  <User size={20} color="#FFFFFF" />
-                </View>
               </View>
             )}
 
+            {/* Loading Indicator */}
             {loading && (
               <View style={styles.loadingContainer}>
-                <ActivityIndicator size="small" color="#4A90E2" />
-                <View style={styles.reasoningTeaser}>
-                  <Brain size={14} color="#4A90E2" />
-                  <Text style={styles.reasoningTeaserText}>Agent reasoning in progress...</Text>
+                <View style={[styles.reasoningTeaser, { backgroundColor: colors.primaryLight }]}>
+                  <Brain size={16} color={colors.primary} />
+                  <Text style={[styles.reasoningTeaserText, { color: colors.primary }]}>Agent reasoning in progress...</Text>
+                  <ActivityIndicator size="small" color={colors.primary} style={{ marginLeft: 10 }} />
                 </View>
               </View>
             )}
 
+            {/* Fallback Response */}
             {fallbackResponse ? (
               <View style={styles.aiMessage}>
-                <View style={styles.avatar}>
+                <View style={[styles.avatar, { backgroundColor: colors.primary }]}>
                   <Bot size={20} color="#FFFFFF" />
                 </View>
-                <View style={styles.bubble}>
-                  <Text style={styles.aiText}>{fallbackResponse}</Text>
+                <View style={[styles.bubble, { backgroundColor: colors.bubbleAI, borderColor: colors.border }]}>
+                  <Text style={[styles.aiText, { color: colors.text }]}>{fallbackResponse}</Text>
                 </View>
               </View>
             ) : null}
           </View>
         </ScrollView>
 
-        <View style={styles.inputArea}>
+        {/* Input Area */}
+        <View style={[styles.inputArea, { backgroundColor: colors.card, borderTopColor: colors.border }]}>
           <TextInput
-            style={styles.textInput}
-            placeholder="Message Digital Mazdoor..."
-            placeholderTextColor="#9CA3AF"
+            style={[styles.textInput, { backgroundColor: colors.inputBg, color: colors.text }]}
+            placeholder="Type your request here..."
+            placeholderTextColor={colors.textSecondary}
             value={input}
             onChangeText={setInput}
             multiline
             maxLength={500}
           />
           <TouchableOpacity 
-            style={[styles.sendButton, !input.trim() && styles.disabledButton]} 
+            style={[
+              styles.sendButton, 
+              { backgroundColor: input.trim() && !loading ? colors.primary : colors.border }
+            ]} 
             onPress={handleOrchestration}
             disabled={loading || !input.trim()}
           >
-            <Send size={18} color="#FFFFFF" />
+            <Send size={20} color={input.trim() && !loading ? '#FFFFFF' : colors.icon} />
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -128,7 +132,6 @@ export default function RequestScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
   },
   container: {
     flex: 1,
@@ -139,7 +142,7 @@ const styles = StyleSheet.create({
   },
   chatContainer: {
     flex: 1,
-    paddingBottom: 10,
+    paddingBottom: 20,
   },
   aiMessage: {
     flexDirection: 'row',
@@ -153,112 +156,76 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   avatar: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: '#4A90E2',
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 8,
-  },
-  userAvatar: {
-    backgroundColor: '#4A5568',
-    marginLeft: 8,
-    marginRight: 0,
+    marginRight: 12,
   },
   bubble: {
-    maxWidth: '75%',
-    backgroundColor: '#FFFFFF',
+    maxWidth: '80%',
     paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: 20,
-    borderBottomLeftRadius: 4,
-    elevation: 1,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
+    paddingVertical: 14,
+    borderRadius: 24,
+    borderWidth: 1,
   },
   userBubble: {
-    backgroundColor: '#4A90E2',
-    borderBottomLeftRadius: 20,
     borderBottomRightRadius: 4,
+    borderWidth: 0,
   },
   aiText: {
-    color: '#374151',
-    lineHeight: 22,
-    fontSize: 15,
+    lineHeight: 24,
+    fontSize: 16,
   },
   userText: {
     color: '#FFFFFF',
-    lineHeight: 22,
-    fontSize: 15,
+    lineHeight: 24,
+    fontSize: 16,
   },
   hint: {
-    fontSize: 13,
-    color: '#6B7280',
+    fontSize: 14,
     fontStyle: 'italic',
   },
   loadingContainer: {
     alignItems: 'flex-start',
-    marginLeft: 40,
-    marginTop: -10,
+    marginLeft: 48,
     marginBottom: 20,
   },
   reasoningTeaser: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 8,
-    backgroundColor: '#EBF8FF',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 20,
   },
   reasoningTeaserText: {
-    marginLeft: 6,
-    fontSize: 12,
-    color: '#2B6CB0',
-    fontWeight: '500',
+    marginLeft: 8,
+    fontSize: 14,
+    fontWeight: '600',
   },
   inputArea: {
     flexDirection: 'row',
-    padding: 12,
-    paddingHorizontal: 16,
-    backgroundColor: '#FFFFFF',
+    padding: 16,
     borderTopWidth: 1,
-    borderTopColor: '#F1F5F9',
     alignItems: 'flex-end',
   },
   textInput: {
     flex: 1,
-    backgroundColor: '#F1F5F9',
-    borderRadius: 20,
-    paddingHorizontal: 16,
-    paddingTop: 12,
-    paddingBottom: 12,
+    borderRadius: 24,
+    paddingHorizontal: 20,
+    paddingTop: 14,
+    paddingBottom: 14,
     marginRight: 12,
-    minHeight: 44,
+    minHeight: 52,
     maxHeight: 120,
-    fontSize: 15,
-    color: '#1F2937',
+    fontSize: 16,
   },
   sendButton: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: '#4A90E2',
+    width: 52,
+    height: 52,
+    borderRadius: 26,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 2,
-    shadowColor: '#4A90E2',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-  },
-  disabledButton: {
-    backgroundColor: '#E2E8F0',
-    elevation: 0,
-    shadowOpacity: 0,
   },
 });
-

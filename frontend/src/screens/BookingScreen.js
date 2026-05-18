@@ -1,91 +1,102 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { CheckCircle, Calendar, Clock, MapPin, DollarSign, ChevronRight } from 'lucide-react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { CheckCircle, Calendar, Clock, MapPin, User, ChevronRight } from 'lucide-react-native';
 import { useGlobalState } from '../store/GlobalContext';
+import { useTheme } from '../store/ThemeContext';
 
 export default function BookingScreen({ navigation }) {
   const { currentBooking } = useGlobalState();
+  const { colors } = useTheme();
+  
   const provider = currentBooking?.provider;
 
   if (!provider) {
     return (
-      <View style={styles.container}>
-        <Text>Loading booking details...</Text>
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <Text style={{ color: colors.text }}>Loading booking details...</Text>
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.successHeader}>
-        <View style={styles.successCircle}>
-          <CheckCircle size={40} color="#FFFFFF" />
+        <View style={[styles.successCircle, { backgroundColor: colors.success }]}>
+          <CheckCircle size={48} color="#FFFFFF" />
         </View>
-        <Text style={styles.successTitle}>Booking Confirmed!</Text>
-        <Text style={styles.successSubtitle}>Your service is scheduled successfully.</Text>
+        <Text style={[styles.successTitle, { color: colors.text }]}>Booking Confirmed!</Text>
+        <Text style={[styles.successSubtitle, { color: colors.textSecondary }]}>Your service is scheduled successfully.</Text>
       </View>
 
-      <View style={styles.detailsCard}>
-        <Text style={styles.sectionTitle}>Service Details</Text>
+      <View style={[styles.detailsCard, { backgroundColor: colors.card, borderColor: colors.border }]}>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>Service Details</Text>
         
         <View style={styles.row}>
-          <Calendar size={18} color="#4A90E2" />
+          <View style={[styles.iconBg, { backgroundColor: colors.inputBg }]}>
+             <Calendar size={20} color={colors.primary} />
+          </View>
           <View style={styles.rowContent}>
-            <Text style={styles.label}>Date</Text>
-            <Text style={styles.value}>May 16, 2026</Text>
+            <Text style={[styles.label, { color: colors.textSecondary }]}>Date</Text>
+            <Text style={[styles.value, { color: colors.text }]}>May 16, 2026</Text>
           </View>
         </View>
 
         <View style={styles.row}>
-          <Clock size={18} color="#4A90E2" />
+          <View style={[styles.iconBg, { backgroundColor: colors.inputBg }]}>
+             <Clock size={20} color={colors.primary} />
+          </View>
           <View style={styles.rowContent}>
-            <Text style={styles.label}>Estimated Time</Text>
-            <Text style={styles.value}>11:00 AM - 12:30 PM</Text>
+            <Text style={[styles.label, { color: colors.textSecondary }]}>Estimated Time</Text>
+            <Text style={[styles.value, { color: colors.text }]}>11:00 AM - 12:30 PM</Text>
           </View>
         </View>
 
         <View style={styles.row}>
-          <MapPin size={18} color="#4A90E2" />
+          <View style={[styles.iconBg, { backgroundColor: colors.inputBg }]}>
+             <MapPin size={20} color={colors.primary} />
+          </View>
           <View style={styles.rowContent}>
-            <Text style={styles.label}>Location</Text>
-            <Text style={styles.value}>{provider.location.neighborhood}, Karachi</Text>
+            <Text style={[styles.label, { color: colors.textSecondary }]}>Location</Text>
+            <Text style={[styles.value, { color: colors.text }]}>{provider.location.neighborhood}, Karachi</Text>
           </View>
         </View>
 
-        <View style={styles.divider} />
+        <View style={[styles.divider, { backgroundColor: colors.border }]} />
 
-        <Text style={styles.sectionTitle}>Provider Info</Text>
+        <Text style={[styles.sectionTitle, { color: colors.text }]}>Provider Info</Text>
         <View style={styles.providerInfo}>
-          <View style={styles.providerAvatar}>
-            <Text style={styles.avatarText}>{provider.full_name.charAt(0)}</Text>
+          <View style={[styles.providerAvatar, { backgroundColor: colors.primary }]}>
+             <User size={24} color="#FFF" />
           </View>
           <View style={styles.providerDetails}>
-            <Text style={styles.providerNameText}>{provider.full_name}</Text>
-            <Text style={styles.providerServiceText}>{provider.service_type}</Text>
+            <Text style={[styles.providerNameText, { color: colors.text }]}>{provider.full_name}</Text>
+            <Text style={[styles.providerServiceText, { color: colors.textSecondary }]}>{provider.service_type}</Text>
           </View>
         </View>
 
-        <View style={styles.divider} />
+        <View style={[styles.divider, { backgroundColor: colors.border }]} />
 
         <View style={styles.priceRow}>
-          <Text style={styles.priceLabel}>Estimated Price</Text>
-          <Text style={styles.priceValue}>Rs. {provider.base_rate}</Text>
+          <Text style={[styles.priceLabel, { color: colors.textSecondary }]}>Estimated Price</Text>
+          <Text style={[styles.priceValue, { color: colors.primary }]}>Rs. {provider.base_rate}</Text>
         </View>
       </View>
 
-      <TouchableOpacity 
-        style={styles.homeButton}
-        onPress={() => navigation.navigate('Home')}
-      >
-        <Text style={styles.homeButtonText}>Back to Home</Text>
-      </TouchableOpacity>
+      <View style={styles.bottomActions}>
+         <TouchableOpacity 
+            style={[styles.homeButton, { backgroundColor: colors.primary }]}
+            onPress={() => navigation.navigate('Home')}
+         >
+            <Text style={[styles.homeButtonText, { color: colors.buttonText }]}>Back to Home</Text>
+         </TouchableOpacity>
 
-      <TouchableOpacity 
-        style={styles.historyButton}
-        onPress={() => navigation.navigate('History')}
-      >
-        <Text style={styles.historyButtonText}>View Booking History</Text>
-      </TouchableOpacity>
+         <TouchableOpacity 
+            style={[styles.historyButton, { backgroundColor: colors.inputBg }]}
+            onPress={() => navigation.navigate('History')}
+         >
+            <Text style={[styles.historyButtonText, { color: colors.text }]}>View Booking History</Text>
+         </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -93,102 +104,101 @@ export default function BookingScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
     padding: 20,
+    justifyContent: 'center',
   },
   successHeader: {
     alignItems: 'center',
-    marginTop: 40,
     marginBottom: 40,
   },
   successCircle: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#48BB78',
+    width: 96,
+    height: 96,
+    borderRadius: 48,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 15,
-    elevation: 4,
+    marginBottom: 20,
+    elevation: 10,
+    shadowColor: '#10B981',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.3,
+    shadowRadius: 20,
   },
   successTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#2D3748',
+    fontSize: 28,
+    fontWeight: '800',
+    marginBottom: 8,
   },
   successSubtitle: {
-    fontSize: 14,
-    color: '#718096',
-    marginTop: 5,
+    fontSize: 16,
   },
   detailsCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 20,
-    elevation: 2,
+    borderRadius: 24,
+    padding: 24,
+    borderWidth: 1,
+    elevation: 4,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
-    shadowRadius: 2,
+    shadowRadius: 10,
   },
   sectionTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#4A5568',
-    marginBottom: 15,
+    fontSize: 18,
+    fontWeight: '800',
+    marginBottom: 20,
   },
   row: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    marginBottom: 15,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  iconBg: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   rowContent: {
-    marginLeft: 15,
+    marginLeft: 16,
   },
   label: {
-    fontSize: 12,
-    color: '#A0AEC0',
+    fontSize: 13,
     textTransform: 'uppercase',
+    letterSpacing: 1,
+    fontWeight: '600',
+    marginBottom: 4,
   },
   value: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: '#2D3748',
+    fontSize: 16,
+    fontWeight: '700',
   },
   divider: {
     height: 1,
-    backgroundColor: '#F1F5F9',
-    marginVertical: 15,
+    marginVertical: 20,
   },
   providerInfo: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   providerAvatar: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: '#E2E8F0',
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 15,
-  },
-  avatarText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#4A5568',
+    marginRight: 16,
   },
   providerDetails: {
     flex: 1,
   },
   providerNameText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#2D3748',
+    fontSize: 18,
+    fontWeight: '800',
+    marginBottom: 4,
   },
   providerServiceText: {
-    fontSize: 14,
-    color: '#718096',
+    fontSize: 15,
   },
   priceRow: {
     flexDirection: 'row',
@@ -197,34 +207,32 @@ const styles = StyleSheet.create({
   },
   priceLabel: {
     fontSize: 16,
-    color: '#4A5568',
+    fontWeight: '600',
   },
   priceValue: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#2D3748',
+    fontSize: 24,
+    fontWeight: '800',
+  },
+  bottomActions: {
+     marginTop: 40,
   },
   homeButton: {
-    backgroundColor: '#4A90E2',
-    paddingVertical: 15,
-    borderRadius: 12,
+    paddingVertical: 18,
+    borderRadius: 20,
     alignItems: 'center',
-    marginTop: 30,
+    marginBottom: 16,
   },
   homeButtonText: {
-    color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '800',
   },
   historyButton: {
-    paddingVertical: 15,
-    borderRadius: 12,
+    paddingVertical: 18,
+    borderRadius: 20,
     alignItems: 'center',
-    marginTop: 10,
   },
   historyButtonText: {
-    color: '#4A90E2',
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: 16,
+    fontWeight: '700',
   },
 });

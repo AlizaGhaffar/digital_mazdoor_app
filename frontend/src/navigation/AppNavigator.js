@@ -2,7 +2,10 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
+import { ThemeContext } from '../store/ThemeContext';
+
 // Import Screens (To be created)
+import WelcomeScreen from '../screens/WelcomeScreen';
 import HomeScreen from '../screens/HomeScreen';
 import RequestScreen from '../screens/RequestScreen';
 import ResultsScreen from '../screens/ResultsScreen';
@@ -13,25 +16,32 @@ import HistoryScreen from '../screens/HistoryScreen';
 const Stack = createStackNavigator();
 
 export default function AppNavigator() {
+  const { colors, isDark } = React.useContext(ThemeContext);
+
   return (
     <NavigationContainer>
       <Stack.Navigator 
-        initialRouteName="Home"
+        initialRouteName="Welcome"
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#FFFFFF',
+            backgroundColor: colors.card,
             elevation: 0,
             shadowOpacity: 0,
             borderBottomWidth: 1,
-            borderBottomColor: '#E2E8F0',
+            borderBottomColor: colors.border,
           },
           headerTitleStyle: {
             fontWeight: 'bold',
-            color: '#2D3748',
+            color: colors.text,
           },
-          headerTintColor: '#4A90E2',
+          headerTintColor: colors.primary,
         }}
       >
+        <Stack.Screen 
+          name="Welcome" 
+          component={WelcomeScreen} 
+          options={{ headerShown: false }}
+        />
         <Stack.Screen 
           name="Home" 
           component={HomeScreen} 

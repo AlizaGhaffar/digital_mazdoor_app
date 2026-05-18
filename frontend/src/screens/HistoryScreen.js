@@ -1,59 +1,64 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { Clock, CheckCircle, XCircle, Info, ChevronRight } from 'lucide-react-native';
+import { Clock, Info, ChevronRight, CheckCircle, Search } from 'lucide-react-native';
 import { useGlobalState } from '../store/GlobalContext';
-
-const StatusBadge = ({ status }) => {
-  const isCompleted = status === 'STARTING' || status === 'Active' || status === 'SUCCESS'; // Simplified for demo
-  
-  return (
-    <View style={[styles.statusBadge, isCompleted ? styles.statusSuccess : styles.statusPending]}>
-      <Text style={[styles.statusText, isCompleted ? styles.statusTextSuccess : styles.statusTextPending]}>
-        {status || 'Unknown'}
-      </Text>
-    </View>
-  );
-};
+import { useTheme } from '../store/ThemeContext';
 
 export default function HistoryScreen({ navigation }) {
   const { history } = useGlobalState();
+  const { colors, isDark } = useTheme();
+
+  const StatusBadge = ({ status }) => {
+    const isCompleted = status === 'STARTING' || status === 'Active' || status === 'SUCCESS' || status === 'CONFIRMED'; 
+    
+    return (
+      <View style={[
+        styles.statusBadge, 
+        { backgroundColor: isCompleted ? colors.success + '20' : colors.warning + '20' }
+      ]}>
+        <Text style={[
+          styles.statusText, 
+          { color: isCompleted ? colors.success : colors.warning }
+        ]}>
+          {status || 'Unknown'}
+        </Text>
+      </View>
+    );
+  };
 
   const renderItem = ({ item }) => (
     <TouchableOpacity 
-      style={styles.historyCard}
-      onPress={() => {
-        // In a real app, we would load the specific workflow traces
-        // For demo, we just show the card
-      }}
+      style={[styles.historyCard, { backgroundColor: colors.card, borderColor: colors.border }]}
+      activeOpacity={0.8}
     >
       <View style={styles.cardHeader}>
         <View style={styles.serviceInfo}>
-          <Text style={styles.serviceTitle}>{item.intent?.service_type || 'General Service'}</Text>
-          <Text style={styles.dateText}>{item.workflow_id || 'ID: 20260515'}</Text>
+          <Text style={[styles.serviceTitle, { color: colors.text }]}>{item.intent?.service_type || 'General Service'}</Text>
+          <Text style={[styles.dateText, { color: colors.textSecondary }]}>{item.workflow_id || 'ID: 20260515'}</Text>
         </View>
         <StatusBadge status={item.workflow_status} />
       </View>
 
       <View style={styles.cardContent}>
         <View style={styles.infoRow}>
-          <Clock size={14} color="#718096" />
-          <Text style={styles.infoText}>Urgency: {item.intent?.urgency || 'Medium'}</Text>
+          <Clock size={16} color={colors.icon} />
+          <Text style={[styles.infoText, { color: colors.text }]}>Urgency: {item.intent?.urgency || 'Medium'}</Text>
         </View>
         <View style={styles.infoRow}>
-          <Info size={14} color="#718096" />
-          <Text style={styles.infoText}>Location: {item.location_name || 'Karachi'}</Text>
+          <MapPin size={16} color={colors.icon} />
+          <Text style={[styles.infoText, { color: colors.text }]}>Location: {item.location_name || 'Karachi'}</Text>
         </View>
       </View>
 
-      <View style={styles.cardFooter}>
-        <Text style={styles.footerLink}>View Full AI Trace</Text>
-        <ChevronRight size={16} color="#4A90E2" />
+      <View style={[styles.cardFooter, { borderTopColor: colors.border }]}>
+        <Text style={[styles.footerLink, { color: colors.primary }]}>View Full AI Trace</Text>
+        <ChevronRight size={18} color={colors.primary} />
       </View>
     </TouchableOpacity>
   );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       {history.length > 0 ? (
         <FlatList
           data={history}
@@ -64,14 +69,14 @@ export default function HistoryScreen({ navigation }) {
         />
       ) : (
         <View style={styles.emptyState}>
-          <Clock size={60} color="#E2E8F0" />
-          <Text style={styles.emptyTitle}>No Booking History</Text>
-          <Text style={styles.emptySubtitle}>Your agentic AI requests will appear here.</Text>
+          <Search size={80} color={colors.border} style={{ marginBottom: 20 }} />
+          <Text style={[styles.emptyTitle, { color: colors.text }]}>No Booking History</Text>
+          <Text style={[styles.emptySubtitle, { color: colors.textSecondary }]}>Your agentic AI requests will appear here.</Text>
           <TouchableOpacity 
-            style={styles.startBtn}
+            style={[styles.startBtn, { backgroundColor: colors.primary }]}
             onPress={() => navigation.navigate('Request')}
           >
-            <Text style={styles.startBtnText}>Make First Request</Text>
+            <Text style={[styles.startBtnText, { color: colors.buttonText }]}>Make First Request</Text>
           </TouchableOpacity>
         </View>
       )}
@@ -79,87 +84,74 @@ export default function HistoryScreen({ navigation }) {
   );
 }
 
+// Temporary import fix for MapPin (missed in initial imports)
+import { MapPin } from 'lucide-react-native';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
   },
   listContent: {
     padding: 20,
   },
   historyCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 15,
-    elevation: 1,
+    borderRadius: 20,
+    padding: 20,
+    marginBottom: 16,
+    borderWidth: 1,
+    elevation: 2,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
-    shadowRadius: 2,
+    shadowRadius: 5,
   },
   cardHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: 15,
+    marginBottom: 20,
   },
   serviceTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#2D3748',
+    fontSize: 18,
+    fontWeight: '800',
+    marginBottom: 4,
   },
   dateText: {
-    fontSize: 12,
-    color: '#A0AEC0',
-    marginTop: 2,
+    fontSize: 13,
   },
   statusBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 6,
-  },
-  statusSuccess: {
-    backgroundColor: '#C6F6D5',
-  },
-  statusPending: {
-    backgroundColor: '#FEEBC8',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 8,
   },
   statusText: {
-    fontSize: 10,
-    fontWeight: 'bold',
-  },
-  statusTextSuccess: {
-    color: '#22543D',
-  },
-  statusTextPending: {
-    color: '#744210',
+    fontSize: 11,
+    fontWeight: '800',
+    letterSpacing: 0.5,
   },
   cardContent: {
-    marginBottom: 15,
+    marginBottom: 20,
   },
   infoRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 5,
+    marginBottom: 8,
   },
   infoText: {
-    fontSize: 13,
-    color: '#4A5568',
-    marginLeft: 8,
+    fontSize: 15,
+    fontWeight: '500',
+    marginLeft: 10,
   },
   cardFooter: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: 12,
+    paddingTop: 16,
     borderTopWidth: 1,
-    borderTopColor: '#F1F5F9',
   },
   footerLink: {
-    fontSize: 13,
-    color: '#4A90E2',
-    fontWeight: '600',
+    fontSize: 14,
+    fontWeight: '700',
   },
   emptyState: {
     flex: 1,
@@ -168,26 +160,29 @@ const styles = StyleSheet.create({
     padding: 40,
   },
   emptyTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#2D3748',
+    fontSize: 24,
+    fontWeight: '800',
     marginTop: 20,
   },
   emptySubtitle: {
-    fontSize: 14,
-    color: '#718096',
+    fontSize: 16,
     textAlign: 'center',
-    marginTop: 10,
-    marginBottom: 30,
+    marginTop: 12,
+    marginBottom: 40,
+    lineHeight: 24,
   },
   startBtn: {
-    backgroundColor: '#4A90E2',
-    paddingHorizontal: 25,
-    paddingVertical: 12,
-    borderRadius: 12,
+    paddingHorizontal: 32,
+    paddingVertical: 16,
+    borderRadius: 24,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
   },
   startBtnText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontWeight: '800',
   },
 });
