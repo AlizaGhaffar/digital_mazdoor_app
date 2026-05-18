@@ -20,7 +20,9 @@ class DisputeAgent(BaseAgent):
             reasoning.append("Validating Provider GPS logs for the last 4 hours (simulated).")
             reasoning.append("Provider 'Ali Khan' last pings: 15km from site at scheduled time.")
             reasoning.append("Cross-referencing provider phone connectivity: Online, but no movement.")
-            resolution = "Provider No-Show confirmed. Full refund initiated for Booking BK-9281. Provider flagged for penalty."
+            reasoning.append("Checking provider strike history: 3rd no-show in 30 days detected.")
+            reasoning.append("Blacklist logic triggered: Provider temporarily suspended.")
+            resolution = "Provider No-Show confirmed. Full refund initiated for Booking BK-9281. Provider flagged for penalty and temporarily blacklisted."
             status = "resolved"
         elif "kharab" in raw_input or "quality" in raw_input:
             reasoning.append("Opening photo evidence submitted via WhatsApp (simulated).")

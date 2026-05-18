@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from typing import Optional, Dict
 import uvicorn
 
 from app.services.orchestrator import Orchestrator
@@ -33,6 +34,7 @@ app.add_middleware(
 class OrchestrationRequest(BaseModel):
     user_id: str = "guest"
     prompt: str
+    location_context: Optional[Dict] = None
 
 @app.post("/v1/orchestrate")
 async def orchestrate(request: OrchestrationRequest):
@@ -52,7 +54,7 @@ async def orchestrate(request: OrchestrationRequest):
     orchestrator.add_agent(ProviderOptAgent())
 
     try:
-        result = await orchestrator.run_workflow(request.prompt)
+        result = await orchestrator.run_workflow(request.prompt, request.location_context)
         return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

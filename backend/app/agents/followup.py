@@ -15,21 +15,33 @@ class FollowupAgent(BaseAgent):
         if not booking:
             return {"followup": None}
 
-        reasoning.append(f"Scheduling follow-up for Booking {booking['id']}...")
-        reasoning.append("Simulating 'Job Completion' trigger from provider.")
+        reasoning.append(f"Simulating Service Quality Loop for Booking {booking['id']}...")
+        reasoning.append("Provider status update: 'En-route' -> ETA 15 mins.")
+        reasoning.append("Provider status update: 'Arrived at location'.")
+        
+        # Mock Checklist
+        checklist = ["Inspected issue", "Used standard tools", "Tested functionality", "Cleaned up area"]
+        reasoning.append(f"Provider submitted completion checklist: {len(checklist)}/4 tasks verified.")
         
         # Mock Feedback
         feedback = {
             "rating": 5,
             "comment": "Bohat acha kaam kiya, time pe aye.",
-            "completion_status": "success"
+            "completion_status": "success",
+            "checklist": checklist
         }
         
-        reasoning.append(f"Feedback received: {feedback['rating']}/5 stars. '{feedback['comment']}'")
+        reasoning.append(f"Customer feedback collected: {feedback['rating']}/5 stars. '{feedback['comment']}'")
+        reasoning.append("Updating provider reputation profile... Reliability Score increased by 2 points.")
         
         decision = {
             "followup": {
                 "status": "completed",
+                "service_quality_loop": {
+                    "en_route_tracked": True,
+                    "checklist_verified": True,
+                    "reputation_impact": "+2 points"
+                },
                 "feedback": feedback
             }
         }

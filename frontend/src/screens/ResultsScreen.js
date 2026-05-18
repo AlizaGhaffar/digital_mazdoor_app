@@ -71,7 +71,12 @@ export default function ResultsScreen({ navigation }) {
         </View>
 
         {/* Recommended Providers */}
-        <Text style={styles.sectionTitle}>Recommended Providers</Text>
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Recommended Providers</Text>
+          <Text style={styles.sectionSubtitle}>
+            Ranked by AI considering distance, reliability, urgency, and pricing.
+          </Text>
+        </View>
         
         {providers.map((item, index) => (
           <TouchableOpacity 
@@ -189,11 +194,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginRight: 5,
   },
+  sectionHeader: {
+    marginBottom: 15,
+  },
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#1A202C',
-    marginBottom: 15,
+    marginBottom: 4,
+  },
+  sectionSubtitle: {
+    fontSize: 12,
+    color: '#718096',
   },
   providerCard: {
     backgroundColor: '#FFFFFF',

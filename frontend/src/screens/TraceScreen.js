@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Platform } from 'react-native';
 import { Brain, CheckCircle, Info, ChevronDown, ChevronUp } from 'lucide-react-native';
 import { useGlobalState } from '../store/GlobalContext';
 

@@ -1,4 +1,5 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import * as Location from 'expo-location';
 
 const GlobalContext = createContext();
 
@@ -8,6 +9,48 @@ export const GlobalProvider = ({ children }) => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentBooking, setCurrentBooking] = useState(null);
+  const [userLocation, setUserLocation] = useState({ name: 'Locating...', coords: null });
+
+  useEffect(() => {
+    (async () => {
+      try {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          setUserLocation({ name: 'Location Denied', coords: null });
+          return;
+        }
+
+        let location = await Location.getCurrentPositionAsync({});
+        let geocode = await Location.reverseGeocodeAsync({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude
+        });
+
+        if (geocode && geocode.length > 0) {
+          const place = geocode[0];
+          const name = `${place.district || place.city || place.subregion || place.region}, ${place.country}`;
+          setUserLocation({
+            name: name,
+            coords: {
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude
+            }
+          });
+        } else {
+          setUserLocation({
+            name: 'Unknown Location',
+            coords: {
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude
+            }
+          });
+        }
+      } catch (error) {
+        console.error("Location error:", error);
+        setUserLocation({ name: 'Gulshan-e-Iqbal, Karachi (Fallback)', coords: null });
+      }
+    })();
+  }, []);
 
   const updateWorkflow = (data) => {
     setWorkflowContext(data.final_context);
@@ -32,7 +75,8 @@ export const GlobalProvider = ({ children }) => {
       setLoading,
       currentBooking,
       setCurrentBooking,
-      updateWorkflow
+      updateWorkflow,
+      userLocation
     }}>
       {children}
     </GlobalContext.Provider>

@@ -19,11 +19,12 @@ class Orchestrator:
         """Register an agent in the pipeline."""
         self.agents.append(agent)
 
-    async def run_workflow(self, initial_input: str):
+    async def run_workflow(self, initial_input: str, location_context: Dict = None):
         """Execute the full agentic workflow with dynamic routing."""
         workflow_id = datetime.now().strftime("%Y%m%d_%H%M%S")
         self.context["workflow_id"] = workflow_id
         self.context["raw_input"] = initial_input
+        self.context["device_location"] = location_context
         self.context["workflow_status"] = "STARTING"
         
         dm_logger.info(f"--- [WORKFLOW START: {workflow_id}] ---")
@@ -38,6 +39,18 @@ class Orchestrator:
         
         workflow_intent = self.context.get("intent", {}).get("workflow_intent", "NEW_BOOKING")
         dm_logger.info(f"Routed to pipeline: {workflow_intent}")
+
+        # Check for unsupported service fallback
+        intent_data = self.context.get("intent", {})
+        if intent_data.get("service_type") == "UNSUPPORTED" or intent_data.get("is_ambiguous"):
+            self.context["workflow_status"] = "UNSUPPORTED"
+            self.context["fallback_response"] = intent_data.get("fallback_response", "Sorry, we cannot process this request at the moment.")
+            dm_logger.info("Workflow halted due to unsupported or ambiguous service.")
+            self._archive_workflow(workflow_id)
+            return {
+                "final_context": self.context,
+                "all_traces": self.traces
+            }
 
         # Define pipelines
         pipeline = []

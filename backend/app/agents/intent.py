@@ -1,148 +1,113 @@
-import re
+import os
+import json
+import httpx
 from typing import Any, Dict
 from .base_agent import BaseAgent
 
 class IntentAgent(BaseAgent):
     """
-    Enhanced Intent Agent for Roman Urdu and semantic understanding.
+    Enhanced Intent Agent using LLM for multilingual understanding,
+    Roman Urdu support, and true autonomous fallback reasoning.
     """
     def __init__(self):
         super().__init__("intent_agent")
-        # Comprehensive lexicon for Pakistani context
-        self.service_map = {
-            "AC Repair": {
-                "keywords": ["ac", "air condition", "thanda", "cooling", "service", "compressor", "leak", "split", "window"],
-                "urdu": ["اے سی", "کولنگ", "سروس", "خراب"]
-            },
-            "Plumber": {
-                "keywords": ["plumber", "plumbing", "nalk", "pani", "leak", "washroom", "tanki", "tap", "pipeline", "motor"],
-                "urdu": ["پلمبر", "نلکا", "پانی", "لیک", "ٹانکی"]
-            },
-            "Electrician": {
-                "keywords": ["bijli", "light", "electric", "shart", "short", "fan", "motor", "switch", "wiring", "ups", "solar"],
-                "urdu": ["بجلی", "لائٹ", "پنکھا", "تار"]
-            },
-            "Painter": {
-                "keywords": ["painter", "rang", "paint", "deewar", "wall", "distemper"],
-                "urdu": ["پینٹر", "رنگ", "دیوار"]
-            }
-        }
-        self.loc_map = {
-            "Gulshan": ["gulshan", "iqbal", "johar", "scheme 33"],
-            "DHA": ["dha", "defence", "phase", "clifton", "sea view"],
-            "Nazimabad": ["nazimabad", "liaquatabad", "paposh", "north"],
-            "Malir": ["malir", "cantt", "model colony", "airport"]
-        }
-
-    def _normalize(self, text: str) -> str:
-        """Standardizes input for better matching."""
-        text = text.lower()
-        # Remove common punctuation
-        text = re.sub(r'[^\w\s]', '', text)
-        # Normalize common Roman Urdu variations
-        replacements = {
-            "khraab": "kharab",
-            "kharaab": "kharab",
-            "thk": "theek",
-            "thik": "theek",
-            "zarorat": "zaroorat",
-            "chahye": "chahiye",
-            "chaye": "chahiye"
-        }
-        for old, new in replacements.items():
-            text = text.replace(old, new)
-        return text.strip()
+        # Supported categories for Digital Mazdoor
+        self.supported_categories = [
+            "AC Repair",
+            "Plumber",
+            "Electrician",
+            "Painter",
+            "Tutor"
+        ]
 
     async def run(self, context: Dict[str, Any]) -> Dict[str, Any]:
         raw_input = context.get("raw_input", "")
-        normalized_input = self._normalize(raw_input)
-        reasoning = [f"Normalized input to: '{normalized_input}'"]
+        device_location = context.get("device_location")
+        location_hint = device_location["name"] if device_location else "Karachi"
         
-        # 1. Service Detection with Scoring
-        detected_services = []
-        for srv, maps in self.service_map.items():
-            score = 0
-            matches = []
-            for kw in maps["keywords"] + maps["urdu"]:
-                if kw in normalized_input:
-                    score += 1
-                    matches.append(kw)
-            if score > 0:
-                detected_services.append({
-                    "service": srv,
-                    "score": score,
-                    "matches": matches
-                })
+        reasoning = [f"Analyzing input: '{raw_input}'"]
+        reasoning.append(f"Device Location Context: {location_hint}")
 
-        # Sort by score descending
-        detected_services.sort(key=lambda x: x["score"], reverse=True)
+        system_prompt = f"""
+You are the Intent Classification and Reasoning Engine for 'Digital Mazdoor', a service provider orchestration platform in Pakistan.
+The user's raw input may be in English, Urdu, Roman Urdu, or mixed slang.
 
-        service = "General"
-        confidence = 0.0
+Current Supported Provider Categories: {json.dumps(self.supported_categories)}
+Device Location (Fallback if location not explicitly mentioned in input): {location_hint}
+
+Your task:
+1. Understand the user's service request.
+2. Determine if it perfectly matches a supported category, partially matches, or is completely unsupported (e.g., asking for a "massi"/domestic helper, doctor, etc.).
+3. Determine the 'workflow_intent' (NEW_BOOKING, CANCELLATION, DISPUTE, RESCHEDULE, STATUS_CHECK).
+4. Extract location name from input (or fallback to Device Location).
+5. Extract urgency (High, Medium, Low).
+6. Classify job complexity (basic, intermediate, complex) based on the problem description.
+7. Provide a confidence score (0.0 to 1.0).
+
+CRITICAL RULE FOR UNSUPPORTED SERVICES:
+If the user asks for a service we DO NOT support (like a maid/massi), you MUST set "service_type" to "UNSUPPORTED".
+Do NOT hallucinate a mapping to a random category.
+Instead, generate a natural conversational Urdu/Roman Urdu "fallback_response" explaining that the service is unavailable, but list the supported categories they can use.
+
+Respond ONLY in valid JSON matching this schema:
+{{
+  "service_type": "string (One of supported categories, or 'UNSUPPORTED')",
+  "location_name": "string",
+  "urgency": "string (High, Medium, Low)",
+  "complexity": "string (basic, intermediate, complex)",
+  "workflow_intent": "string",
+  "confidence": float,
+  "is_ambiguous": boolean,
+  "reasoning_trace": "string (A brief 1-sentence explanation of your decision)",
+  "fallback_response": "string (Optional, only provide if UNSUPPORTED or ambiguous)"
+}}
+
+User Input: "{raw_input}"
+"""
         
-        if not detected_services:
-            reasoning.append("No specific service keywords detected. Defaulting to 'General'.")
-            confidence = 0.3
-        elif len(detected_services) > 1 and detected_services[0]["score"] == detected_services[1]["score"]:
-            reasoning.append(f"Ambiguity detected between {detected_services[0]['service']} and {detected_services[1]['service']}.")
-            service = detected_services[0]["service"] # Take first but lower confidence
-            confidence = 0.5
-        else:
-            top_match = detected_services[0]
-            service = top_match["service"]
-            # Confidence based on match density and uniqueness
-            confidence = min(0.95, 0.4 + (top_match["score"] * 0.2))
-            reasoning.append(f"Service identified as '{service}' via keywords: {top_match['matches']}.")
-
-        # 2. Location Detection
-        location = "Karachi"
-        detected_locs = []
-        for loc, keywords in self.loc_map.items():
-            if any(kw in normalized_input for kw in keywords):
-                detected_locs.append(loc)
+        reasoning.append("Querying LLM for intent resolution...")
         
-        if detected_locs:
-            location = detected_locs[0]
-            reasoning.append(f"Location scoped to: '{location}'.")
-            if len(detected_locs) > 1:
-                reasoning.append(f"Note: Multiple locations mentioned {detected_locs}, using first match.")
+        llm_response = await self._call_llm(system_prompt)
 
-        # 3. Urgency & Sentiment
-        urgency = "Medium"
-        if any(kw in normalized_input for kw in ["emergency", "jaldi", "abhi", "urgent", "phat gaya", "fauri"]):
-            urgency = "High"
-            reasoning.append("High urgency detected: User indicates immediate need.")
-        elif any(kw in normalized_input for kw in ["budget", "sasta", "kam paisa", "ghareeb", "discount"]):
-            urgency = "Low"
-            reasoning.append("Price sensitivity detected (Low Urgency priority).")
-
-        # 4. Workflow Intent Detection
-        workflow_intent = "NEW_BOOKING"
-        if any(kw in normalized_input for kw in ["cancel", "kardo khatam", "nahi chahiye", "roko"]):
-            workflow_intent = "CANCELLATION"
-            reasoning.append("Workflow Intent: User wants to CANCEL an existing booking.")
-        elif any(kw in normalized_input for kw in ["complain", "shikayat", "kharab kaam", "nahi aya", "fraud"]):
-            workflow_intent = "DISPUTE"
-            reasoning.append("Workflow Intent: User is reporting a DISPUTE.")
-        elif any(kw in normalized_input for kw in ["time change", "reschedule", "baad me", "parson"]):
-            workflow_intent = "RESCHEDULE"
-            reasoning.append("Workflow Intent: User wants to RESCHEDULE.")
-        elif any(kw in normalized_input for kw in ["kahan hai", "status", "kitni dair"]):
-            workflow_intent = "STATUS_CHECK"
-            reasoning.append("Workflow Intent: User is checking STATUS.")
-        else:
-            reasoning.append("Workflow Intent: Defaulting to NEW_BOOKING flow.")
-
-        decision = {
-            "intent": {
-                "service_type": service,
-                "location_name": location,
-                "urgency": urgency,
-                "workflow_intent": workflow_intent,
-                "confidence": round(confidence, 2),
-                "is_ambiguous": confidence < 0.4 or (len(detected_services) > 1 and detected_services[0]["score"] == detected_services[1]["score"])
+        if "error" in llm_response:
+            # Fallback to general if LLM fails
+            reasoning.append(f"LLM Error: {llm_response['error']}. Falling back to default heuristics.")
+            decision = {
+                "intent": {
+                    "service_type": "General",
+                    "location_name": "Karachi",
+                    "urgency": "Medium",
+                    "complexity": "intermediate",
+                    "workflow_intent": "NEW_BOOKING",
+                    "confidence": 0.1,
+                    "is_ambiguous": True
+                }
             }
-        }
+            self._add_trace(reasoning, decision)
+            return decision
+
+        reasoning.append(f"LLM Reasoning: {llm_response.get('reasoning_trace', 'N/A')}")
         
+        service_type = llm_response.get("service_type", "UNSUPPORTED")
+        if service_type == "UNSUPPORTED":
+            reasoning.append("Unsupported service detected. Initiating intelligent fallback workflow.")
+        elif llm_response.get("confidence", 0) < 0.4:
+            reasoning.append(f"Low confidence ({llm_response.get('confidence')}) detected. Flagging as ambiguous.")
+        else:
+            reasoning.append(f"Successfully mapped intent to supported category: {service_type}")
+
+        intent_data = {
+            "service_type": service_type,
+            "location_name": llm_response.get("location_name", "Karachi"),
+            "urgency": llm_response.get("urgency", "Medium"),
+            "complexity": llm_response.get("complexity", "intermediate"),
+            "workflow_intent": llm_response.get("workflow_intent", "NEW_BOOKING"),
+            "confidence": llm_response.get("confidence", 0.0),
+            "is_ambiguous": llm_response.get("is_ambiguous", False),
+            "fallback_response": llm_response.get("fallback_response")
+        }
+
+        decision = {"intent": intent_data}
         self._add_trace(reasoning, decision)
+        
         return decision

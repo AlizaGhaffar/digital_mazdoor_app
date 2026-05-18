@@ -44,7 +44,17 @@ class PricingAgent(BaseAgent):
             slot_fee = int(base_rate * 0.10)
             reasoning.append(f"Applied After-hours surcharge (Evening/Night): +{slot_fee} PKR.")
 
-        final_price = base_rate + urgency_fee + travel_fee + slot_fee
+        # 4. Complexity Surcharge
+        complexity_fee = 0
+        complexity = intent.get("complexity", "basic")
+        if complexity == "intermediate":
+            complexity_fee = int(base_rate * 0.20)
+            reasoning.append(f"Applied Intermediate Complexity surcharge: +{complexity_fee} PKR.")
+        elif complexity == "complex":
+            complexity_fee = int(base_rate * 0.50)
+            reasoning.append(f"Applied High Complexity surcharge: +{complexity_fee} PKR.")
+
+        final_price = base_rate + urgency_fee + travel_fee + slot_fee + complexity_fee
         
         decision = {
             "pricing": {
@@ -54,7 +64,8 @@ class PricingAgent(BaseAgent):
                     "base_rate": base_rate,
                     "urgency_adjustment": urgency_fee,
                     "travel_fee": travel_fee,
-                    "after_hours_fee": slot_fee
+                    "after_hours_fee": slot_fee,
+                    "complexity_fee": complexity_fee
                 }
             }
         }

@@ -12,7 +12,7 @@ const services = [
 ];
 
 export default function HomeScreen({ navigation }) {
-  const { history } = useGlobalState();
+  const { history, userLocation } = useGlobalState();
 
   return (
     <View style={styles.container}>
@@ -20,7 +20,7 @@ export default function HomeScreen({ navigation }) {
         {/* Location Header */}
         <View style={styles.locationHeader}>
           <MapPin size={20} color="#4A90E2" />
-          <Text style={styles.locationText}>Gulshan-e-Iqbal, Karachi</Text>
+          <Text style={styles.locationText}>{userLocation?.name || 'Locating...'}</Text>
         </View>
 
         {/* Search Bar */}
