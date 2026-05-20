@@ -1,0 +1,17 @@
+{
+  "name": "digital-mazdoor",
+  "version": "1.0.0",
+  "main": "frontend/App.js",
+  "scripts": {
+    "start": "npm run start --prefix frontend",
+    "android": "npm run android --prefix frontend",
+    "ios": "npm run ios --prefix frontend",
+    "build:preview": "cd frontend && eas build -p android --profile preview"
+  },
+  "dependencies": {
+    "expo": "^55.0.25",
+    "expo-status-bar": "^55.0.6",
+    "react-native-gesture-handler": "^2.31.2",
+    "react-native-safe-area-context": "^5.8.0"
+  }
+}

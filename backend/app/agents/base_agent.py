@@ -5,13 +5,7 @@ import os
 import json
 from dotenv import load_dotenv
 
-from agents import (
-    Agent,
-    Runner,
-    AsyncOpenAI,
-    OpenAIChatCompletionsModel
-)
-from agents.run import RunConfig
+from openai import AsyncOpenAI
 
 from ..core.logging_config import log_agent_step
 

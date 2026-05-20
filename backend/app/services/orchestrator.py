@@ -118,7 +118,9 @@ class Orchestrator:
         """Saves the entire workflow state to a JSON file."""
         try:
             base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-            archive_path = os.path.join(base_dir, "logs", "workflows", f"workflow_{workflow_id}.json")
+            archive_dir = os.path.join(base_dir, "logs", "workflows")
+            os.makedirs(archive_dir, exist_ok=True)
+            archive_path = os.path.join(archive_dir, f"workflow_{workflow_id}.json")
             
             payload = {
                 "workflow_id": workflow_id,

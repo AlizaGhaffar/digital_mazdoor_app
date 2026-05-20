@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "digital_mazdoor",
+    "slug": "digital_mazdoor",
+    "version": "1.0.0",
+    "extra": {
+      "eas": {
+        "projectId": "163231ac-c6f1-445e-8c4f-944b6ba80619"
+      }
+    },
+    "owner": "alizaghaffar",
+    "android": {
+      "package": "com.alizaghaffar.digital_mazdoor"
+    }
+  }
+}

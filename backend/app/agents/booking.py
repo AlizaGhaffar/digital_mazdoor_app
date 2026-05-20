@@ -39,7 +39,8 @@ class BookingAgent(BaseAgent):
                 return {"booking": None}
 
             reasoning.append(f"Initiating booking for {provider['full_name']}...")
-            reasoning.append(f"Finalizing price at {pricing['final_price']} {pricing['currency']}.")
+            final_price = pricing.get('final_price', 0) if pricing else 0
+            reasoning.append(f"Finalizing price at {final_price} PKR.")
             
             # Simulated DB Transaction
             booking_id = f"BK-{uuid.uuid4().hex[:8].upper()}"
@@ -52,7 +53,7 @@ class BookingAgent(BaseAgent):
                     "id": booking_id,
                     "status": "CONFIRMED",
                     "provider_id": provider["id"],
-                    "total_price": pricing["final_price"],
+                    "total_price": final_price,
                     "arrival_time": schedule["estimated_arrival"]
                 },
                 "workflow_status": "BOOKED"

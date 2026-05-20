@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Digital Mazdoor",
-    "slug": "digital-mazdoor",
+    "slug": "digital_mazdoor",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,10 +14,12 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "owner": "alizaghaffar",
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "package": "com.alizaghaffar.digital_mazdoor",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -25,6 +27,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "163231ac-c6f1-445e-8c4f-944b6ba80619"
+      }
     }
   }
 }
